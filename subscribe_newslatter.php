@@ -13,7 +13,7 @@
               </div>
               <div class="col-md-4 col-sm-5">
                 <div class="contact-form-action">
-                  <form method="post">
+                  <form enctype="multipart/form-data" method="post">
                     <span class="la la-envelope-o"></span>
                     <input class="form-control" type="email" placeholder="Enter your email" required="">
                     <button class="utf_theme_btn" type="submit">Subscribe</button>

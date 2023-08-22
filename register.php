@@ -1,72 +1,15 @@
 <?php
-
-//index.php
-
-//Include Configuration File
 include('./php_mailer_config/config.php');
 
-$login_button = '';
-
-
-if (isset($_GET["code"])) {
-
-  $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
-
-
-  if (!isset($token['error'])) {
-
-    $google_client->setAccessToken($token['access_token']);
-
-
-    $_SESSION['access_token'] = $token['access_token'];
-
-
-    $google_service = new Google_Service_Oauth2($google_client);
-
-
-    $data = $google_service->userinfo->get();
-
-
-    $_SESSION['user_first_name'] = "";
-    if (!empty($data['given_name'])) {
-      $_SESSION['user_first_name'] = $data['given_name'];
-    }
-
-    $_SESSION['user_last_name'] = "";
-    if (!empty($data['family_name'])) {
-      $_SESSION['user_last_name'] = $data['family_name'];
-    }
-
-    $_SESSION['user_email'] = "";
-    if (!empty($data['email'])) {
-      $_SESSION['user_email'] = $data['email'];
-    }
-
-    $_SESSION['user_gender'] = "";
-    if (!empty($data['gender'])) {
-      $_SESSION['user_gender'] = $data['gender'];
-    }
-
-    $_SESSION['user_image'] = "";
-    if (!empty($data['picture'])) {
-      $_SESSION['user_image'] = $data['picture'];
-    }
-  }
-}
-
+unset($_SESSION['phone_for_register']);
+unset($_SESSION['is_phone_verified_for_register']);
 
 if (!isset($_SESSION['access_token'])) {
 
   $login_button = '<a href="' . $google_client->createAuthUrl() . '">Login With Google</a>';
 
   include "./service/db.php";
-
-  function filter($string)
-  {
-    $string = str_replace("<", "&lt;", $string);
-    $string = str_replace(">", "&gt;", $string);
-    return $string;
-  }
+  include "./service/filter_input.php";
 
 
   // sending OTP for forget Password
@@ -120,7 +63,7 @@ if (!isset($_SESSION['access_token'])) {
               // echo "Data insertion failed " . "<br>";
               // echo 'Message: ' . $e->getMessage() . "<br>";
             }
-            // echo "<script> window.location.replace('http://127.0.0.1:8080/author/product_details/index.php');</script>";
+            // echo "<script> window.location.replace('https://127.0.0.1:8080/author/product_details/index.php');</script>";
           }
         } else {
           $exist_result = false;
@@ -222,8 +165,8 @@ if (!isset($_SESSION['access_token'])) {
 
 
 
-  <!-- <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>  -->
+  <!-- <link href='https://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>  -->
 
   <link rel="icon" href="images/favicon.ico">
   <link rel="shortcut icon" href="images/favicon.ico" />
@@ -233,8 +176,8 @@ if (!isset($_SESSION['access_token'])) {
   <link rel="stylesheet" href="css/style.css">
 
   <!--JS-->
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery-migrate-1.2.1.js"></script>
+  <!-- <script src="js/jquery.js"></script>
+  <script src="js/jquery-migrate-1.2.1.js"></script> -->
   <!--<script src="js/script.js"></script>
 <script src="js/superfish.js"></script>
 <script src="js/sForm.js"></script>
@@ -249,9 +192,7 @@ if (!isset($_SESSION['access_token'])) {
 
 <body>
 
-  <?php include "./component/preloader.php"; 
-  
-  
+  <?php include "./component/preloader.php";
   ?>
 
   <style>
@@ -288,163 +229,126 @@ if (!isset($_SESSION['access_token'])) {
 
     <div class="clearfix"></div>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="http://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 
 
     <script type="text/javascript">
-      
-  function validation_for_email_username_phone() {
-    var email = document.getElementById("register_email");
-    email = email.value;
-    var username = document.getElementById("register_username");
-    username = username.value;
-    var phone = document.getElementById("register_phone");
-    phone = phone.value;
-    $.ajax({
-      url: "validation_for_email_username_phone.php",
-      datatype: "JSON",
-      type: "POST",
-      data: {
-        submit: "submit",
-        email: email,
-        username: username,
-        phone: phone,
-      },
-      success: function(result) {
-        result = JSON.parse(result);
-        json_data = result;
-        console.log(json_data);
-        console.log(json_data[0][0]);
-        console.log(json_data[1][0]);
-        console.log(json_data[2][0]);
-        if(0<(json_data[0][0]).length){
-          $('#label_for_username_validation').html(json_data[0][1]);
-        }
-        if(0<(json_data[1][0]).length){
-          $('#label_for_email_validation').html(json_data[1][1]);
-        }
-        if(0<(json_data[2][0]).length){
-          $('#label_for_phone_validation').html(json_data[2][1]);
-        }
+      function validation_for_email_username_phone() {
+        var email = document.getElementById("verify_email");
+        email = email.value;
+        var username = document.getElementById("verify_username");
+        username = username.value;
+        var phone = document.getElementById("verify_phone");
+        phone = phone.value;
+        $.ajax({
+          url: "validation_for_email_username_phone.php",
+          datatype: "JSON",
+          type: "POST",
+          data: {
+            submit: "submit",
+            email: email,
+            username: username,
+            phone: phone,
+          },
+          success: function(result) {
+            result = JSON.parse(result);
+            json_data = result;
+            console.log(json_data);
+            console.log(json_data[0][0]);
+            console.log(json_data[1][0]);
+            console.log(json_data[2][0]);
+            if (0 < (json_data[0][0]).length) {
+              $('#label_for_username_validation').html(json_data[0][1]);
+            }
+            if (0 < (json_data[1][0]).length) {
+              $('#label_for_email_validation').html(json_data[1][1]);
+            }
+            if (0 < (json_data[2][0]).length) {
+              $('#label_for_phone_validation').html(json_data[2][1]);
+            }
 
-        if (0 < (json_data[0][1]+json_data[1][1]+json_data[2][1]).length) {
-          document.getElementById("register_btn").disabled = true;
-        } else {
-          document.getElementById("register_btn").disabled = false;
-        }
+            if (0 < (json_data[0][1] + json_data[1][1] + json_data[2][1]).length) {
+              document.getElementById("verify_btn").disabled = true;
+            } else {
+              document.getElementById("verify_btn").disabled = false;
+            }
+          }
+        });
       }
-    });
-  }
-
-      // function validation_for_email() {
-      //   var email = document.getElementById("register_email");
-      //   email = email.value;
-      //   $.ajax({
-      //     url: "./validation_for_email.php",
-      //     datatype: "json",
-      //     type: "POST",
-      //     data: {
-      //       submit: "submit",
-      //       email: email,
-      //     },
-      //     success: function(result) {
-      //       $('#label_for_email_validation').html(result);
-      //       if (0 < result.length) {
-      //         document.getElementById("register_btn").disabled = true;
-      //       } else {
-      //         document.getElementById("register_btn").disabled = false;
-      //       }
-      //     }
-      //   });
-      // }
-      // function validation_for_phone() {
-      //   var phone = document.getElementById("register_phone");
-      //   phone = phone.value;
-      //   $.ajax({
-      //     url: "./validation_for_phone.php",
-      //     datatype: "json",
-      //     type: "POST",
-      //     data: {
-      //       submit: "submit",
-      //       phone: phone,
-      //     },
-      //     success: function(result) {
-      //       $('#label_for_phone_validation').html(result);
-      //       if (0 < result.length) {
-      //         document.getElementById("register_btn").disabled = true;
-      //       } else {
-      //         document.getElementById("register_btn").disabled = false;
-      //       }
-      //     }
-      //   });
-      // }
-
-      // function validation_for_username() {
-      //   var username = document.getElementById("register_username");
-      //   username = username.value;
-      //   $.ajax({
-      //     url: "./validation_for_username.php",
-      //     datatype: "json",
-      //     type: "POST",
-      //     data: {
-      //       submit: "submit",
-      //       username: username,
-      //     },
-      //     success: function(result) {
-      //       $('#label_for_username_validation').html(result);
-      //       if (0 < result.length) {
-      //         document.getElementById("register_btn").disabled = true;
-      //       } else {
-      //         document.getElementById("register_btn").disabled = false;
-      //       }
-      //     }
-      //   });
-      // }
 
       $(document).ready(function() {
+        $('#btn_send_otp').show();
+        $('#btn_submit_otp').hide();
+        $('#input_enter_otp').hide();
 
-        //##### Add record when Add Record Button is click #########
-        $("#tab2").submit(function(e) {
+        $("#verify_phone_for_register").submit(function(e) {
           e.preventDefault();
-
-          var register_username = $("#register_username").val(); //build a post data structure
-          var register_email = $("#register_email").val(); //build a post data structure
-          var register_phone = $("#register_phone").val(); //build a post data structure
-          var register_first_name = $("#register_first_name").val(); //build a post data structure
-          var register_last_name = $("#register_last_name").val(); //build a post data structure
-          var register_value = $("#register_value").val(); //build a post data structure
-          var user_type = $("#user_type").val(); //build a post data structure
-
-          // console.log(register_value);
-          // console.log(register_last_name);
-          // console.log(register_first_name);
-          // console.log(register_email);
-          // console.log(register_username);
+          var verify_phone = $("#verify_phone").val(); //build a post data structure
+          var verify_phone_otp = $("#verify_phone_otp").val(); //build a post data structure
           jQuery.ajax({
             type: "POST", // Post / Get method
-            url: "response.php", //Where form data is sent on submission
+            url: "verify_phone.php", //Where form data is sent on submission
             dataType: "text", // Data type, HTML, json etc.
             data: {
-              register_username: register_username,
-              register_email: register_email,
-              register_phone: register_phone,
-              register_first_name: register_first_name,
-              register_last_name: register_last_name,
-              register_value: register_value,
-              user_type: user_type
+              verify_phone: verify_phone,
+              verify_phone_otp: verify_phone_otp,
             }, //Form variables
             success: function(response) {
 
-              console.log(response);
-
-              alert(
-                'Registration DONE Successfully\n\n' +
-                "Eamil has been sent successfully, check your email for further process.\n"
-              );
+              // console.log(response);
+              // alert(
+              //   'OTP Sent Successfully\n\n'
+              // );
+              if (response.includes('Sent Success')) {
+                console.log(response);
+                $('#btn_send_otp').hide();
+                $('#btn_submit_otp').show();
+                $('#input_enter_otp').show();
+                alert(
+                  'OTP Sent Successfully\n\n'
+                );
+              }
+              if (response.includes('Invalid otp')) {
+                console.log(response);
+                alert(
+                  'Invalid otp Entered\n\n'
+                );
+              }
+              if (response.includes('Invalid Phone Number')) {
+                console.log(response);
+                alert(
+                  'Invalid Phone Number - Length Mismatch(Expected: 10)\n\n'
+                );
+              }
+              if (response.includes('failed')) {
+                console.log(response);
+                alert(
+                  'Phone no. Verification is  Failed\n\n'
+                );
+              }
+              if (response.includes('Verified')) {
+                console.log(response);
+                alert(
+                  'Phone no. is Successfully Verified\n\n'
+                );
+                window.location.replace('register_account.php');
+              }
+              if (response.includes('OTP Matched')) {
+                console.log(response);
+                alert(
+                  'Phone no. is Successfully Verified\n\n'
+                );
+                window.location.replace('register_account.php');
+              }
+              if (response.includes('already Exist')) {
+                console.log(response);
+                alert(
+                  'Phone no. Already Exist\n\n'
+                );
+              }
             },
-
             error: function(xhr, ajaxOptions, thrownError) {
               alert(thrownError);
             }
@@ -464,49 +368,40 @@ if (!isset($_SESSION['access_token'])) {
         <div class="tab_container alt container">
 
 
-          <div class="tab_content" id="tab2">
-            <form method="post" class="register">
-              <p class="utf_row_form utf_form_wide_block">
-                <label for="register_first_name">
-                  <input class="input-text" type="text" name="register_first_name" id="register_first_name" placeholder="First Name" />
-                </label>
-              </p>
-              <p class="utf_row_form utf_form_wide_block">
-                <label for="register_last_name">
-                  <input class="input-text" type="text" name="register_last_name" id="register_last_name" placeholder="Last Name" />
-                </label>
-              </p>
-              <?php echo "<h4 style='color:red;' id='label_for_username_validation'></h4>"; ?>
-              <p class="utf_row_form utf_form_wide_block">
-                <label for="register_username">
-                  <input type="text" class="input-text" onchange="validation_for_email_username_phone()" onload="validation_for_email_username_phone()" name="register_username" id="register_username" value="" placeholder="Username" />
-                </label>
-              </p>
+          <div class="tab_content" id="verify_phone_for_register">
+            <form enctype="multipart/form-data" method="post" class="register">
+
               <?php echo "<h4 style='color:red;' id='label_for_phone_validation'></h4>"; ?>
               <p class="utf_row_form utf_form_wide_block">
-                <label for="register_phone">
-                  <input type="phone" class="input-text" onchange="validation_for_email_username_phone()" onload="validation_for_email_username_phone()" name="register_phone" id="register_phone" value="" placeholder="phone no." />
+                <label for="verify_phone">Phone no.
+                  <input type="tel" class="input-text" onchange="validation_for_email_username_phone()" onload="validation_for_email_username_phone()" name="verify_phone" id="verify_phone" value="" placeholder="Phone no." />
                 </label>
               </p>
-              <?php echo "<h4 style='color:red;' id='label_for_email_validation'></h4>"; ?>
-              <p class="utf_row_form utf_form_wide_block">
-                <label for="register_email">
-                  <input type="email" class="input-text" onchange="validation_for_email_username_phone()" onload="validation_for_email_username_phone()" name="register_email" id="register_email" value="" placeholder="Email" />
+              <p class="utf_row_form utf_form_wide_block" id='input_enter_otp'>
+                <label for="verify_phone_otp">Enter OTP.
+                  <input type="number" class="input-text" onchange="validation_for_email_username_phone()" onload="validation_for_email_username_phone()" name="verify_phone_otp" id="verify_phone_otp" value="" placeholder="Enter OTP" />
                 </label>
               </p>
-              <?php echo "<h4 style='color:red;' id='label_for_user_type_validation'></h4>"; ?>
-              <p class="utf_row_form utf_form_wide_block">
-                <label for="register_user_type">
-                  <select id="user_type" name="user_type">
-                    <option name="user_type" value="">Type</option>
-                    <option name="user_type" value="user">Seller</option>
-                    <option name="user_type" value="buyer">Buyer</option>
-                  </select>
+              <p class="utf_row_form utf_form_wide_block" id='btn_send_otp'>
+                <label>
+                  <input type="submit" id="verify_phone_btn" class="button border fw margin-top-10" name="verify_phone_btn" value="Send OTP" />
                 </label>
-              </p>  
+              </p>
+              <p class="utf_row_form utf_form_wide_block" id='btn_submit_otp'>
+                <label>
+                  <input type="submit" id="verify_phone_otp" class="button border fw margin-top-10" name="verify_phone_otp" value="Verify Phone No." />
+                </label>
+              </p>
 
-              <input type="hidden" name="register_value" value="register_value" id="register_value" />
-              <input type="submit" id="register_btn" class="button border fw margin-top-10" name="register" value="Register" />
+
+              <div class="utf_row_form utf_form_wide_block form_forgot_part">
+                <div class="checkboxes fl_right">
+                  <span class=""> <a href="login.php">Already have an account? Login.</a> </span>
+                </div>
+              </div>
+
+              <input type="hidden" name="verify_phone_value" value="verify_phone_value" id="verify_phone_value" />
+              <!-- <input type="submit" id="verify_btn" class="button border fw margin-top-10" name="verify" value="verify" /> -->
             </form>
           </div>
 
@@ -514,5 +409,6 @@ if (!isset($_SESSION['access_token'])) {
       </div>
     </div>
     <?php include "./component/footer.php"; ?>
-</body> 
+</body>
+
 </html>

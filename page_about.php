@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/page_about.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:43:50 GMT -->
+
 
 <head>
   <meta name="author" content="">
@@ -94,8 +94,8 @@
           <div class="utf_pricing_container_block margin-top-30 margin-bottom-20">
    
             <div class="plan featured col-md-6 col-sm-6 col-xs-12">
-              <div class="utf_price_plan">
-              <img class="i1" src="http://udyamisahayak.com/images/img5.jpg" style="width: 100%; height: 240px; margin-top: -35px; margin-left: -2px;">
+            <div class="utf_price_plan">
+              <img class="i1" src="./images/images1.jpg" style="width: 100%; height: 240px; margin-top: -23px; margin-left: -2px;">
               </div>
               <div class="utf_price_plan_features">
               <h3 class="i3">Historical Background :</h3>
@@ -104,8 +104,8 @@
             </div>
 
             <div class="plan featured col-md-6 col-sm-6 col-xs-12">
-              <div class="utf_price_plan">
-              <img src="http://udyamisahayak.com/images/img5.jpg" style="width: 100%; height: 240px; margin-top: -35px; margin-left: -2px;">                
+            <div class="utf_price_plan">
+              <img class="i1" src="./images/images1.jpg" style="width: 100%; height: 240px; margin-top: -23px; margin-left: -2px;">
               </div>
               <div class="utf_price_plan_features">
               <h3 class="i3">Revamping of JBCRI into MGIRI :</h3>
@@ -140,6 +140,6 @@
 
 </body>
 
-<!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/page_about.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:43:50 GMT -->
+
 
 </html>

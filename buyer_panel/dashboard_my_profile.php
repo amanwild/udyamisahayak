@@ -67,8 +67,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["update_profile"]) &&
 		$user_instagram_link = $_POST['user_instagram_link'];
 	}
 	$user_image = '';
-	if (isset($_POST["user_image"])) {
-		$user_image = $_POST['user_image'];
+	if (isset($_FILES['user_image'])) {
+		if ("" != $_FILES["user_image"]["tmp_name"]) {
+			unlink_img('user_image', 'users_entries', 'user_id', $user_id, $connect);
+			$user_image = get_server_image_name('user_image');
+		}
 	}
 
 	// $user_last_name = $_POST['user_last_name'];
@@ -90,9 +93,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["update_profile"]) &&
 
 	try {
 		$update_query = "UPDATE `users_entries` SET `user_phone` = '$user_phone', `user_first_name` = '$user_first_name', `user_last_name` = '$user_last_name', `user_country_id` = '$user_country', `user_state_id` = '$user_state', `user_city_id` = '$user_city', `user_age` = '$user_age', `user_dob` = '$user_dob', `user_address` = '$user_address', `user_facebook_link` = '$user_facebook_link', `user_google_link` = '$user_google_link', `user_instagram_link` = '$user_instagram_link' WHERE `users_entries`.`user_id` = $user_id";
-		if ("" != ($_POST["user_image"])) {
+		if ("" != ($user_image)) {
 			$update_query = "UPDATE `users_entries` SET `user_phone` = '$user_phone', `user_first_name` = '$user_first_name', `user_last_name` = '$user_last_name', `user_country_id` = '$user_country', `user_state_id` = '$user_state', `user_city_id` = '$user_city', `user_age` = '$user_age', `user_dob` = '$user_dob', `user_address` = '$user_address', `user_facebook_link` = '$user_facebook_link', `user_google_link` = '$user_google_link', `user_instagram_link` = '$user_instagram_link', `user_image` = '$user_image' WHERE `users_entries`.`user_id` = $user_id";
-			$_SESSION['user_image'] = $_POST["user_image"];
+			$_SESSION['user_image'] = $user_image;
 		}
 		// echo $update_query;
 		$update_result = mysqli_query($connect, $update_query);
@@ -126,10 +129,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["update_profile"]) &&
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="images/favicon.png">
 	<!-- Style CSS -->
-	<link rel="stylesheet" href="css/stylesheet.css">
-	<link rel="stylesheet" href="css/mmenu.css">
-	<link rel="stylesheet" href="css/perfect-scrollbar.css">
-	<link rel="stylesheet" href="css/style.css" id="colors">
+	<link rel="stylesheet" href="../css/stylesheet.css">
+	<link rel="stylesheet" href="../css/mmenu.css">
+	<link rel="stylesheet" href="../css/perfect-scrollbar.css">
+	<link rel="stylesheet" href="../css/style.css" id="colors">
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
@@ -189,7 +192,7 @@ include "../service/db.php";
 					<div class="row">
 						<div class="col-lg-12 col-md-12">
 							<div class="utf_dashboard_list_box margin-top-0">
-								<form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+								<form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
 									<h4 class="gray"><i class="sl sl-icon-user"></i> Profile Details</h4>
 									<div class="utf_dashboard_list_box-static">
 										<div class="edit-profile-photo"> <img id="profile_dp" src="
@@ -200,16 +203,12 @@ include "../service/db.php";
 										}
 									} else {
 										if (isset($_SESSION['user_image'])) {
-											echo "../wp-content/uploads/data/" . $_SESSION['user_image'];
+											echo "../images/" . $_SESSION['user_image'];
 										} else {
-											echo "../wp-content/uploads/data/dashboard-avatar.jpg";
+											echo "../images/dashboard-avatar.jpg";
 										}
 									} ?>" alt="">
-											<div class="change-photo-btn">
-												<div class="photoUpload"> <span><i class="fa fa-upload"></i> Upload Photo</span>
-													<input type="file" id="user_image" name="user_image" onchange="showimg();" class="upload" />
-												</div>
-											</div>
+											
 										</div>
 										<?php if (false) {
 											if ($_SESSION['user_image_url'] != "") {
@@ -231,7 +230,7 @@ include "../service/db.php";
 											}
 										} else {
 											// if (isset($_SESSION['user_image'])) {
-											// 	echo "../wp-content/uploads/data/" . $_SESSION['user_image'];
+											// 	echo "../images/" . $_SESSION['user_image'];
 											// }
 										} ?>
 
@@ -265,10 +264,10 @@ include "../service/db.php";
 													<label>Birth</label>
 													<input type="text" id="user_dob" name="user_dob" value="">
 												</div> -->
-												<div class="col-md-4">
+												<!-- <div class="col-md-4">
 													<label>Age</label>
 													<input type="text" id="user_age" name="user_age" value="<?= $row['user_age'] ?>">
-												</div>
+												</div> -->
 												<!-- <div class="col-md-4">
 													<label>Country</label>
 													<input type="text" id="user_country" name="user_country" value="">
@@ -303,7 +302,7 @@ include "../service/db.php";
 												function showimg() {
 													var x = (document.getElementById("user_image").value).slice(12, 100);
 													console.log(x);
-													document.getElementById("profile_dp").src = "../wp-content/uploads/data/" + x;
+													document.getElementById("profile_dp").src = "../images/" + x;
 												}
 											</script>
 										</div>
@@ -324,17 +323,17 @@ include "../service/db.php";
 	</div>
 
 	<!-- Scripts -->
-	<script src="scripts/jquery-3.4.1.min.js"></script>
-	<script src="scripts/chosen.min.js"></script>
-	<script src="scripts/perfect-scrollbar.min.js"></script>
-	<script src="scripts/slick.min.js"></script>
-	<script src="scripts/rangeslider.min.js"></script>
-	<script src="scripts/magnific-popup.min.js"></script>
-	<script src="scripts/jquery-ui.min.js"></script>
-	<script src="scripts/mmenu.js"></script>
-	<script src="scripts/tooltips.min.js"></script>
-	<script src="scripts/color_switcher.js"></script>
-	<script src="scripts/jquery_custom.js"></script>
+	<script src="../scripts/jquery-3.4.1.min.js"></script>
+	<script src="../scripts/chosen.min.js"></script>
+	<script src="../scripts/perfect-scrollbar.min.js"></script>
+	<script src="../scripts/slick.min.js"></script>
+	<script src="../scripts/rangeslider.min.js"></script>
+	<script src="../scripts/magnific-popup.min.js"></script>
+	<script src="../scripts/jquery-ui.min.js"></script>
+	<script src="../scripts/mmenu.js"></script>
+	<script src="../scripts/tooltips.min.js"></script>
+	<script src="../scripts/color_switcher.js"></script>
+	<script src="../scripts/jquery_custom.js"></script>
 	<script>
 		(function($) {
 			try {

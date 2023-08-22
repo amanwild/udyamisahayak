@@ -25,7 +25,7 @@ $category_id = $_GET['category_id'];
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/listings_list_full_width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:21:13 GMT -->
+
 
 <head>
   <meta name="author" content="">
@@ -43,9 +43,25 @@ $category_id = $_GET['category_id'];
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+  <style>
+    #tiptip_holder{
+      display:none !important;
+      height:0px;
+    }
+    #tiptip_arrow_inner{
+      display:none !important;
+      height:0px;
+    }
+    #tiptip_content{
+      display:none !important;
+      height:0px;
+    }
+  </style>
+
 </head>
 
 <body>
+  
 
   <!-- Preloader Start -->
   <div class="preloader">
@@ -195,15 +211,45 @@ $category_id = $_GET['category_id'];
   <script src="scripts/mmenu.js"></script>
   <script src="scripts/tooltips.min.js"></script>
   <script src="scripts/jquery_custom.js"></script>
+  <script>
+
+    $('#state').on('change', function() {
+      var state_id = this.value;
+      // alert("hello");
+
+      $.ajax({
+        url: "./service/cities-by-state.php",
+        type: "POST",
+        data: {
+          state_id: state_id
+        },
+        cache: false,
+        success: function(result) {
+          $("#city").empty();
+          $("#city").removeClass('selectpicker');
+
+          $("#city").append("",
+            <?php
+
+            ?> "<select style='margin-bottom:0px' name='city_id' value='' title='' id='city_id' data-selected-text-format='count'> </select> ",
+            <?php
+            ?>
+          );
+          $("#city_id").html(result);
+          console.log(result);
+        }
+      });
+    });
+  </script>
 
   <!-- Maps -->
-  <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+  <!-- <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
   <script src="scripts/infobox.min.js"></script>
   <script src="scripts/markerclusterer.js"></script>
-  <script src="scripts/maps.js"></script>
+  <script src="scripts/maps.js"></script> -->
 
 </body>
 
-<!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/listings_list_full_width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:21:13 GMT -->
+
 
 </html>

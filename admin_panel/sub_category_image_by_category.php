@@ -9,12 +9,24 @@ $result = mysqli_query($connect, "SELECT * FROM sub_category where sub_category_
 // echo"SELECT * FROM sub_category where category_id = $category_id";
 while ($row = mysqli_fetch_array($result)) {
 ?>
+
+    <!-- <div class="utf_submit_section col-md-4">
+        <h4>Logo</h4>
+        <div class="">
+            <input type="file" name="category_image" id="category_image">
+        </div>
+        <div class="">
+            <img style="" class="dropzone" name="view_logo_image" id="view_logo_image" src="../images/" />
+        </div>
+        </input>
+    </div> -->
+
     <div class="" style="margin-top:1px">
-        <div class="utf_submit_section col-md-3" style="padding:1px;margin:1px;border:solid #ffd5d5 1px;">
+        <div class="utf_submit_section col-md-3" style="padding:1px;margin:0px;border:solid #ffd5d5 1px;">
 
             <h4><b><?php echo $row["sub_category_name"]; ?> </b>Logo</h4>
             <div class="">
-                <input type="file" onchange="showimg<?php echo $row['sub_category_id']; ?>();" name="logo_image<?php echo $row["sub_category_id"]; ?>" id="logo_image<?php echo $row["sub_category_id"]; ?>">
+                <input type="file" name="logo_image<?php echo $row["sub_category_id"]; ?>" id="logo_image<?php echo $row["sub_category_id"]; ?>">
             </div>
             <div class="">
                 <?php
@@ -25,20 +37,20 @@ while ($row = mysqli_fetch_array($result)) {
 
                 } else {
                 ?>
-                    <img style="" class="dropzone" name="view_logo_image<?php echo $row["sub_category_id"]; ?>" id="view_logo_image<?php echo $row["sub_category_id"]; ?>" src="" />
+                    
 
                 <?php
                 } ?>
             </div>
 
-            <script>
+            <!-- <script>
                 function showimg<?php echo $row["sub_category_id"]; ?>() {
                     document.getElementById("view_logo_image<?php echo $row["sub_category_id"]; ?>").style.display = "block";
                     var x = (document.getElementById("logo_image<?php echo $row["sub_category_id"]; ?>").value).slice(12, 100);
                     console.log(x);
                     document.getElementById("view_logo_image<?php echo $row["sub_category_id"]; ?>").src = "../images/" + x;
                 }
-            </script>
+            </script> -->
 
             </input>
         </div>

@@ -37,7 +37,7 @@ if (isset($_GET['search'])) {
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/listings_list_full_width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:21:13 GMT -->
+
 
 <head>
 
@@ -540,7 +540,7 @@ if (isset($_GET['search'])) {
                   </div>
                   <hr class="my-3" style="margin-top:20px;margin-bottom:20px;">
                   <div class="social-login-v2 login-register">
-                    <form id="enquery_form" method="POST" class="text-center">
+                    <form enctype="multipart/form-data" id="enquery_form" method="POST" class="text-center">
 
                       <div class="form-group">
                         <div class="inner-addon left-addon">
@@ -640,7 +640,7 @@ if (isset($_GET['search'])) {
   <script src="scripts/markerclusterer.js"></script>
   <script src="scripts/maps.js"></script>
 
-  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> -->
 
   <script type="text/javascript">
     function update_enquery(listing_id) {
@@ -913,6 +913,37 @@ if (isset($_GET['search'])) {
     }
   </script>
   <script>
+
+$('#state').on('change', function() {
+  var state_id = this.value;
+  // alert("hello");
+
+  $.ajax({
+    url: "./service/cities-by-state.php",
+    type: "POST",
+    data: {
+      state_id: state_id
+    },
+    cache: false,
+    success: function(result) {
+      $("#city").empty();
+      $("#city").removeClass('selectpicker');
+
+      $("#city").append("",
+        <?php
+
+        ?> "<select style='margin-bottom:0px' name='city_id' value='' title='' id='city_id' data-selected-text-format='count'> </select> ",
+
+        <?php
+        ?>
+      );
+      $("#city_id").html(result);
+      console.log(result);
+    }
+  });
+});
+</script>
+  <script>
     function validation_for_email_username_phone() {
       var email = document.getElementById("enquery_email");
       email = email.value;
@@ -960,6 +991,6 @@ if (isset($_GET['search'])) {
   </script>
 </body>
 
-<!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/listings_list_full_width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:21:13 GMT -->
+
 
 </html>

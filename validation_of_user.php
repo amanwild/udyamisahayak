@@ -2,26 +2,29 @@
 <?php
 
 session_start();
-// $loggedin = $_SESSION['loggedin'];
-// $user = $_SESSION['user_Username'];
-// // echo $loggedin;
-// // // echo "<br>";
-// // echo $user;
-// // // echo "<br>";
-if (isset($_SESSION['user_username'])) {
-  // $user_First_name =$_SESSION['user_First_name'];
-  // $user_Last_name = $_SESSION['user_Last_name'];
-  // $user_Email =$_SESSION['user_Email'];
-  // $user_Username =$_SESSION['user_Username'] ; 
-  // $user_Id =$_SESSION['user_Id'];
-  // $user_phone =$_SESSION['user_phone'];
-  // echo "Valid user";
-  // echo$user_First_name .$user_Last_name . $user_Email. $user_Username.$user_Id;  echo "Valid user";
+include "../service/filter_input.php";
+include "../service/upload_image.php";
+include "../service/unlink_image.php";
+
+if (((isset($_SESSION['user_username'])||($_SESSION['user_type']=='admin')) &&(($_SESSION['user_type']=='user')&& ($_SESSION['is_verified_admin'] == '1')))) {
+
+  if(isset($_SESSION['user_image'])){
+    $user_image =$_SESSION['user_image'];
+  }
+  if(isset($_SESSION['user_image_url'])){
+    $user_image_url =$_SESSION['user_image_url'];
+  }
+  if(isset($_SESSION['user_phone'])){
+    $user_phone =$_SESSION['user_phone'];
+  }
+  if(isset($_SESSION['user_email'])){
+    $user_email =$_SESSION['user_email'];
+  }
 } else {
   // echo "INVALID user";
   // echo "<br>";
   // $path  = "Signin";
-  header("location: .././index.php");
+  header("location: ../login.php");
 }
 include "../service/db.php";
 

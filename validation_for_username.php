@@ -1,12 +1,8 @@
 <?php
 include "../service/db.php";
+include "../service/filter_input.php";
+include "../service/upload_image.php";
 
-function filter($string)
-{
-    $string = str_replace("<", "&lt;", $string);
-    $string = str_replace(">", "&gt;", $string);
-    return $string;
-}
 
 // if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST['username'])) {
     

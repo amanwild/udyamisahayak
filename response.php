@@ -12,7 +12,7 @@ echo json_encode($_POST);
 if (isset($_POST["register_email"]) && isset($_POST["register_value"])) {
 	$user_type = $_POST["user_type"];
 	$register_email = $_POST["register_email"];
-	$register_phone = $_POST["register_phone"];
+	$register_phone = $_SESSION['phone_for_register'];
 	$register_username = $_POST["register_username"];
 	$register_first_name = $_POST["register_first_name"];
 	$register_last_name = $_POST["register_last_name"];
@@ -26,6 +26,8 @@ if (isset($_POST["register_email"]) && isset($_POST["register_value"])) {
 		$store = send_mail($register_email, $v_code);
 		if ($store) {
 			$my_id = mysqli_insert_id($connect);
+			unset($_SESSION['phone_for_register']);
+			unset($_SESSION['is_phone_verified_for_register']);
 			echo "success";
 			echo $my_id;
 		}

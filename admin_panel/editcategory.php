@@ -1,11 +1,6 @@
 <?php include "../validation_of_admin.php";
-$category_id = $_GET['cat_id']; 
-function filter($string)
-{
-    $string = str_replace("<", "&lt;", $string);
-    $string = str_replace(">", "&gt;", $string);
-    return $string;
-}
+$category_id = $_GET['cat_id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +18,10 @@ function filter($string)
     <!-- Favicon -->
     <link rel="shortcut icon" href="../images/favicon.png" />
     <!-- Style CSS -->
-    <link rel="stylesheet" href="css/stylesheet.css" />
-    <link rel="stylesheet" href="css/mmenu.css" />
-    <link rel="stylesheet" href="css/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="css/style.css" id="colors" />
+    <link rel="stylesheet" href="../css/stylesheet.css" />
+    <link rel="stylesheet" href="../css/mmenu.css" />
+    <link rel="stylesheet" href="../css/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../css/style.css" id="colors" />
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css" />
@@ -74,8 +69,8 @@ function filter($string)
 
                 if (($_SERVER["REQUEST_METHOD"] == "POST") && (isset($_POST['updateCategory']) && isset($_POST['category_name']))) {
 
-                    $category_id = filter($_POST["category_id"]); 
-                    $category_name = filter($_POST["category_name"]); 
+                    $category_id = filter($_POST["category_id"]);
+                    $category_name = filter($_POST["category_name"]);
                     $subcategory_name = filter($_POST["subcategory_name"]);
                     $category_color = filter($_POST["category_color"]);
 
@@ -116,7 +111,15 @@ function filter($string)
                         // echo "sub_category updated";
                     }
 
-                    $category_image = filter($_POST["category_image"]);
+                    // $category_image = filter($_POST["category_image"]);
+
+                    $category_image = "";
+                    if (isset($_FILES['category_image'])) {
+                        if ("" != $_FILES["category_image"]["tmp_name"]) {
+                            unlink_img('category_image', 'category', 'category_id', $category_id, $connect);
+                            $category_image = get_server_image_name('category_image');
+                        }
+                    }
                     if ($category_image != "") {
                         //    echo $category_image;
                         $update_category_query = "UPDATE `category` SET `category_name` = '$category_name', `category_image` = '$category_image', `category_color` = '$category_color' WHERE `category`.`category_id` = $category_id";
@@ -159,14 +162,14 @@ function filter($string)
                 ?>
 
 
-     
+
                 <div class="row">
                     <div class="col-lg-12">
 
                         <div id="utf_add_listing_part">
-                            <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+                            <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
                                 <input type="hidden" class="updateCategory" id="updateCategory" name="updateCategory">
-                                <input type="hidden" value="<?= $category_id?>" id="category_id" name="category_id">
+                                <input type="hidden" value="<?= $category_id ?>" id="category_id" name="category_id">
                                 <script>
                                     updateCategory.value = true;
                                 </script>
@@ -346,22 +349,13 @@ function filter($string)
                                             <h4>Logo</h4>
                                             <!-- <form></form> -->
                                             <div class="">
-                                                <input type="file" onchange="showimg();" name="category_image" id="category_image">
+                                                <input type="file" name="category_image" id="category_image">
                                             </div>
                                             <div class="">
                                                 <img style="" class="dropzone" name="view_logo_image" id="view_logo_image" src="../images/<?= $category_image ?>" />
                                             </div>
 
-                                            <script>
-                                                function showimg() {
-                                                    document.getElementById("view_logo_image").style.display = "block";
-                                                    var x = (document.getElementById("category_image").value).slice(12, 100);
-                                                    console.log(x);
-                                                    document.getElementById("view_logo_image").src = "../images/" + x;
-                                                    // alert("hello");
-                                                }
-                                            </script>
-
+                                           
                                             </input>
                                         </div>
                                     </div>
@@ -379,18 +373,18 @@ function filter($string)
     </div>
 
     <!-- Scripts -->
-    <script src="scripts/jquery-3.4.1.min.js"></script>
-    <script src="scripts/chosen.min.js"></script>
-    <script src="scripts/perfect-scrollbar.min.js"></script>
-    <script src="scripts/slick.min.js"></script>
-    <script src="scripts/rangeslider.min.js"></script>
-    <script src="scripts/bootstrap-select.min.js"></script>
-    <script src="scripts/magnific-popup.min.js"></script>
-    <script src="scripts/jquery-ui.min.js"></script>
-    <script src="scripts/mmenu.js"></script>
-    <script src="scripts/tooltips.min.js"></script>
-    <script src="scripts/color_switcher.js"></script>
-    <script src="scripts/jquery_custom.js"></script>
+    <script src="../scripts/jquery-3.4.1.min.js"></script>
+    <script src="../scripts/chosen.min.js"></script>
+    <script src="../scripts/perfect-scrollbar.min.js"></script>
+    <script src="../scripts/slick.min.js"></script>
+    <script src="../scripts/rangeslider.min.js"></script>
+    <script src="../scripts/bootstrap-select.min.js"></script>
+    <script src="../scripts/magnific-popup.min.js"></script>
+    <script src="../scripts/jquery-ui.min.js"></script>
+    <script src="../scripts/mmenu.js"></script>
+    <script src="../scripts/tooltips.min.js"></script>
+    <script src="../scripts/color_switcher.js"></script>
+    <script src="../scripts/jquery_custom.js"></script>
     <script>
     </script>
     <script>
@@ -402,7 +396,7 @@ function filter($string)
                 // alert("hello");
                 var category_id = this.value;
                 $.ajax({
-                    url: "sub_category_by_category.php",
+                    url: "../service/sub_category_by_category.php",
                     type: "POST",
                     data: {
                         category_id: category_id
@@ -421,7 +415,7 @@ function filter($string)
                 // alert("hello");
 
                 $.ajax({
-                    url: "cities-by-state.php",
+                    url: "../service/cities-by-state.php",
                     type: "POST",
                     data: {
                         state_id: state_id
@@ -459,14 +453,14 @@ function filter($string)
     </script>
 
     <!-- Style Switcher -->
-   
+
 
     <!-- Maps -->
     <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-    <script src="scripts/infobox.min.js"></script>
-    <script src="scripts/markerclusterer.js"></script>
-    <script src="scripts/maps.js"></script>
-    <script src="scripts/dropzone.js"></script>
+    <script src="../scripts/infobox.min.js"></script>
+    <script src="../scripts/markerclusterer.js"></script>
+    <script src="../scripts/maps.js"></script>
+    <script src="../scripts/dropzone.js"></script>
     <script>
         /**
          * @link https://github.com/hicodersofficial/custom-html-css-js-widgets/tree/main/tag-input-field
@@ -668,7 +662,7 @@ function filter($string)
         }
         // document.getElementById("subcategory_name").setAttribute('value','My default value');
     </script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script>
         function show_table() {
 
@@ -682,7 +676,7 @@ function filter($string)
         // function showimg() {
         //     var x = (document.getElementById("category_image").value).slice(12, 100);
         //     console.log(x);
-        //     document.getElementById("profile_dp").src = "../wp-content/uploads/data/" + x;
+        //     document.getElementById("profile_dp").src = "../images/" + x;
         // }
         // const getButton = document.getElementById('get_multi_tags');
         // const multiInput = document.querySelector('multi-input');
@@ -700,7 +694,7 @@ function filter($string)
     </script>
 
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
     <script>
         $(document).ready(function() {

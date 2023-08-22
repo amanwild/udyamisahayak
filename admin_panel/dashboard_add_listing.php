@@ -3,23 +3,6 @@
 
 ?>
 <?php
-// include "validation_of_session.php";
-// addList: addList
-// listing_title: sd
-// category_id:  83
-// cost: 455
-// sub_category_id: 261
-// product_details: fdsfsd
-// contact_person: Aman Sahu
-// company_name: dfds
-// email_id: asd@dsfs
-// phone_no: 542
-// url: http://127.0.0.1:8080/author/listing_details/index.php
-// state: 12
-// pincode: 440035
-// city: 333
-// location: Bharatwada Road Kalmana
-// logo_image: 08.png
 
 // $category_id = $_GET['category_id'];
 if (isset($_POST['addList'])) {
@@ -43,10 +26,7 @@ if (isset($_POST['addList'])) {
   if (isset($_POST['product_details'])) {
     $product_details = $_POST['product_details'];
   }
-  $logo_image = "";
-  if (isset($_POST['logo_image'])) {
-    $logo_image = $_POST['logo_image'];
-  }
+
   $contact_person = "";
   if (isset($_POST['contact_person'])) {
     $contact_person = $_POST['contact_person'];
@@ -79,8 +59,27 @@ if (isset($_POST['addList'])) {
   if (isset($_POST['state'])) {
     $state = $_POST['state'];
   }
+  
+  $logo_image1 = "";
+  if (isset($_FILES['logo_image1'])) {
+		if ("" != $_FILES["logo_image1"]["tmp_name"]) {
+			$logo_image1 = get_server_image_name('logo_image1');
+		}
+	}
+  $logo_image2 = "";
+  if (isset($_FILES['logo_image2'])) {
+		if ("" != $_FILES["logo_image2"]["tmp_name"]) {
+			$logo_image2 = get_server_image_name('logo_image2');
+		}
+	}
+  $logo_image3 = "";
+  if (isset($_FILES['logo_image3'])) {
+		if ("" != $_FILES["logo_image3"]["tmp_name"]) {
+			$logo_image3 = get_server_image_name('logo_image3');
+		}
+	}
 
-  $insert_listing_query = "INSERT INTO `listing` (`listing_id`, `listing_business_name`, `listing_business_category_id`, `listing_business_sub_category_id`, `listing_description`, `listing_firm_name`, `listing_cost`, `listing_location`, `listing_phone`, `listing_email`, `listing_website`,`listing_image`,`listing_contact_name`,`listing_state_id`,`listing_city_id`) VALUES (NULL, '$listing_title', '$category_id', '$sub_category_id', '$product_details', '$company_name', '$cost', '$location', '$phone_no', '$email_id', '$url', '$logo_image', '$contact_person', '$state', '$city')";
+  $insert_listing_query = "INSERT INTO `listing` (`listing_id`, `listing_business_name`, `listing_business_category_id`, `listing_business_sub_category_id`, `listing_description`, `listing_firm_name`, `listing_cost`, `listing_location`, `listing_phone`, `listing_email`, `listing_website`, `listing_image`,`listing_image2`,`listing_image3`,`listing_contact_name`,`listing_state_id`,`listing_city_id`) VALUES (NULL, '$listing_title', '$category_id', '$sub_category_id', '$product_details', '$company_name', '$cost', '$location', '$phone_no', '$email_id', '$url', '$logo_image1','$logo_image2','$logo_image3', '$contact_person', '$state', '$city')";
 
 
   // echo$insert_listing_query;
@@ -100,12 +99,12 @@ if (isset($_POST['addList'])) {
   <title>Add Listing</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="../wp-content/uploads/data/favicon.png" />
+  <link rel="shortcut icon" href="../images/favicon.png" />
   <!-- Style CSS -->
-  <link rel="stylesheet" href="css/stylesheet.css" />
-  <link rel="stylesheet" href="css/mmenu.css" />
-  <link rel="stylesheet" href="css/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="css/style.css" id="colors" />
+  <link rel="stylesheet" href="../css/stylesheet.css" />
+  <link rel="stylesheet" href="../css/mmenu.css" />
+  <link rel="stylesheet" href="../css/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../css/style.css" id="colors" />
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css" />
@@ -251,7 +250,7 @@ if (isset($_POST['addList'])) {
           <div class="col-lg-12">
 
             <div id="utf_add_listing_part">
-              <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+              <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
                 <input type="hidden" name="addList" id="addList" value="addList" />
                 <div class="add_utf_listing_section margin-top-45" validate>
                   <div class="utf_add_listing_part_headline_part">
@@ -339,7 +338,7 @@ if (isset($_POST['addList'])) {
           <div class="col-lg-12">
 
             <div id="utf_add_listing_part">
-              <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+              <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
                 <input type="hidden" name="addList" id="addList" value="addList" />
                 <div class="add_utf_listing_section margin-top-45" validate>
                   <div class="utf_add_listing_part_headline_part">
@@ -473,7 +472,7 @@ if (isset($_POST['addList'])) {
                       <div class="col-md-6" id="state1">
                         <label for="state">State</label>
                         <div class="intro-search-field utf-chosen-cat-single">
-                          <select class="selectpicker default" style="margin-bottom:0px" name="state" id="state" title="Select State" required>
+                          <select class=" default" style="margin-bottom:0px" name="state" id="state" title="Select State" required>
                             <?php $result = mysqli_query($connect, "SELECT * FROM states");
                             while ($row_for_state_title = mysqli_fetch_array($result)) {
                             ?>
@@ -531,29 +530,50 @@ if (isset($_POST['addList'])) {
                   </div>
                   <div class="row with-forms">
                     <div class="utf_submit_section col-md-4">
-                      <h4>Logo</h4>
+                      <h4>Image 1</h4>
                       <!-- <form></form> -->
                       <div class="">
-                        <input type="file" onchange="showimg();" name="logo_image" id="logo_image" required>
+                        <input type="file"  name="logo_image1" id="logo_image1" >
                       </div>
                       <div class="">
-                        <img style="display:none" class="dropzone" name="view_logo_image" id="view_logo_image" src="" />
+                        <img style="display:none" class="dropzone" name="view_logo_image1" id="view_logo_image1" src="" />
                       </div>
-
-                      <script>
-                        function showimg() {
-                          document.getElementById("view_logo_image").style.display = "block";
-                          var x = (document.getElementById("logo_image").value).slice(12, 100);
-                          console.log(x);
-                          document.getElementById("view_logo_image").src = "./images/" + x;
-                          // alert("hello");
-                        }
-                      </script>
-
                       </input>
                     </div>
+                    <div class="utf_submit_section col-md-4">
+                      <h4>Image 2</h4>
+                      <!-- <form></form> -->
+                      <div class="">
+                        <input type="file"  name="logo_image2" id="logo_image2" >
+                      </div>
+                      <div class="">
+                        <img style="display:none" class="dropzone" name="view_logo_image2" id="view_logo_image2" src="" />
+                      </div>
+                      </input>
+                    </div>
+                    <div class="utf_submit_section col-md-4">
+                      <h4>Image 3</h4>
+                      <!-- <form></form> -->
+                      <div class="">
+                        <input type="file"  name="logo_image3" id="logo_image3" >
+                      </div>
+                      <div class="">
+                        <img style="display:none" class="dropzone" name="view_logo_image3" id="view_logo_image3" src="" />
+                      </div>
+                      </input>
+                    </div>
+                    <script>
+                      function showimg(id) {
+                        document.getElementById("view_logo_image" + id).style.display = "block";
+                        var x = (document.getElementById("logo_image"+id).value).slice(12, 100);
+                        console.log(x);
+                        document.getElementById("view_logo_image" + id).src = "../images/" + x;
+                        // alert("hello");
+                      }
+                    </script>
+
                   </div>
-                </div> <!-- <a href="#" class="button preview">Save </a> -->
+                </div>
                 <button type="submit" class="button preview" id="submit">Save</button>
               </form>
             </div>
@@ -567,18 +587,18 @@ if (isset($_POST['addList'])) {
   </div>
 
   <!-- Scripts -->
-  <script src="scripts/jquery-3.4.1.min.js"></script>
-  <script src="scripts/chosen.min.js"></script>
-  <script src="scripts/perfect-scrollbar.min.js"></script>
-  <script src="scripts/slick.min.js"></script>
-  <script src="scripts/rangeslider.min.js"></script>
-  <script src="scripts/bootstrap-select.min.js"></script>
-  <script src="scripts/magnific-popup.min.js"></script>
-  <script src="scripts/jquery-ui.min.js"></script>
-  <script src="scripts/mmenu.js"></script>
-  <script src="scripts/tooltips.min.js"></script>
-  <script src="scripts/color_switcher.js"></script>
-  <script src="scripts/jquery_custom.js"></script>
+  <script src="../scripts/jquery-3.4.1.min.js"></script>
+  <script src="../scripts/chosen.min.js"></script>
+  <script src="../scripts/perfect-scrollbar.min.js"></script>
+  <script src="../scripts/slick.min.js"></script>
+  <script src="../scripts/rangeslider.min.js"></script>
+  <script src="../scripts/bootstrap-select.min.js"></script>
+  <script src="../scripts/magnific-popup.min.js"></script>
+  <script src="../scripts/jquery-ui.min.js"></script>
+  <script src="../scripts/mmenu.js"></script>
+  <script src="../scripts/tooltips.min.js"></script>
+  <script src="../scripts/color_switcher.js"></script>
+  <script src="../scripts/jquery_custom.js"></script>
   <script>
     //   $(document).ready(function() {
     //     $('#country').on('change', function() {
@@ -599,7 +619,7 @@ if (isset($_POST['addList'])) {
         // alert("hello");
         var category_id = this.value;
         $.ajax({
-          url: "sub_category_by_category.php",
+          url: "../service/sub_category_by_category.php",
           type: "POST",
           data: {
             category_id: category_id
@@ -616,7 +636,7 @@ if (isset($_POST['addList'])) {
       //   // alert("hello");
       //   var country_id = this.value;
       //   $.ajax({
-      //     url: "states-by-country.php",
+      //     url: "../service/states-by-country.php",
       //     type: "POST",
       //     data: {
       //       country_id: country_id
@@ -633,7 +653,7 @@ if (isset($_POST['addList'])) {
       // $('#state').on('change', function() {
       //   var state_id = this.value;
       //   $.ajax({
-      //     url: "cities-by-state.php",
+      //     url: "../service/cities-by-state.php",
       //     type: "POST",
       //     data: {
       //       state_id: state_id
@@ -651,7 +671,7 @@ if (isset($_POST['addList'])) {
         // alert("hello");
 
         $.ajax({
-          url: "cities-by-state.php",
+          url: "../service/cities-by-state.php",
           type: "POST",
           data: {
             state_id: state_id
@@ -708,10 +728,10 @@ if (isset($_POST['addList'])) {
 
   <!-- Maps -->
   <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-  <script src="scripts/infobox.min.js"></script>
-  <script src="scripts/markerclusterer.js"></script>
-  <script src="scripts/maps.js"></script>
-  <script src="scripts/dropzone.js"></script>
+  <script src="../scripts/infobox.min.js"></script>
+  <script src="../scripts/markerclusterer.js"></script>
+  <script src="../scripts/maps.js"></script>
+  <script src="../scripts/dropzone.js"></script>
   <?php if (isset($_POST['addList'])) {
     try {
       $insert_listing_result = mysqli_query($connect, $insert_listing_query);

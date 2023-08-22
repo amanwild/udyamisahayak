@@ -1,14 +1,14 @@
-<form action="search_result.php" method="GET">
-  <div class="main_input_search_part" style="margin:0px;">
+<form enctype="multipart/form-data" action="search_result.php" method="GET">
+  <div class="main_input_search_part" style="margin-top:20px;">
     <div class="main_input_search_part_item" >
       <input type="text" name="search_by" placeholder="What are you looking for?" value="" />
     </div>
 
     <div class="main_input_search_part_item intro-search-field">
-      <select data-placeholder="All States" class="selectpicker default" title="All States" name="state_id" id="state" data-live-search="true" data-selected-text-format="count" data-size="7" value="">
-
+      <select data-placeholder="All States" class=" default" title="All States" name="state_id" id="state" data-live-search="true" data-selected-text-format="count" data-size="7" value="">
+      <option name="state_id" value="">All States</option>
         <?php
-        $select_state_query = "SELECT * FROM `states`";
+        $select_state_query = "SELECT * FROM `states` ORDER BY state_name Asc";
         try {
           $select_state_result = 0;
           if ($connect) {
@@ -33,9 +33,9 @@
       </select>
     </div>
 
-    <div class="main_input_search_part_item intro-search-field">
-      <select data-placeholder="All Cities" class=" default" name="city_id" title="All Cities" id="city" data-live-search="true" data-selected-text-format="count" data-size="7" value="">
-        <option name="city_id" value="">All City</option>
+    <div id="city" class="main_input_search_part_item intro-search-field">
+      <select data-placeholder="All Cities" class=" default" name="city_id" title="All Cities" id="city_id" data-live-search="true" data-selected-text-format="count" data-size="7" value="">
+        <option name="city_id" value="">All Cities</option>
 
         <?php
         $select_city_query = "SELECT * FROM `cities` order by city_name asc";
@@ -66,7 +66,7 @@
       <select data-placeholder="All Categories" class="selectpicker default" name="category_id" title="All Categories" data-live-search="true" data-selected-text-format="count" data-size="7" value="">
 
         <?php
-        $select_category_query = "SELECT * FROM `category` ORDER BY category_since DESC";
+        $select_category_query = "SELECT * FROM `category` ORDER BY category_name Asc";
         try {
           $select_category_result = 0;
           if ($connect) {

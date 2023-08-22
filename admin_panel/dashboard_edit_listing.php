@@ -14,10 +14,10 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="../images/favicon.png" />
   <!-- Style CSS -->
-  <link rel="stylesheet" href="css/stylesheet.css" />
-  <link rel="stylesheet" href="css/mmenu.css" />
-  <link rel="stylesheet" href="css/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="css/style.css" id="colors" />
+  <link rel="stylesheet" href="../css/stylesheet.css" />
+  <link rel="stylesheet" href="../css/mmenu.css" />
+  <link rel="stylesheet" href="../css/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../css/style.css" id="colors" />
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet" />
   <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css" /> -->
@@ -272,7 +272,7 @@
                 <div class="col-lg-12">
 
                   <div id="utf_add_listing_part">
-                    <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+                    <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
 
                       <!-- <input type="hidden" id="edit_listing_user_id" name="edit_listing_user_id" value="<?= $row['listing_contact_name'] ?>" /> -->
                       <!-- <input type="hidden" id="edit_listing_listing_id" name="edit_listing_listing_id" value="<?= $row['listing_id'] ?>" /> -->
@@ -609,18 +609,18 @@
   </div>
 
   <!-- Scripts -->
-  <script src="scripts/jquery-3.4.1.min.js"></script>
-  <script src="scripts/chosen.min.js"></script>
-  <script src="scripts/perfect-scrollbar.min.js"></script>
-  <script src="scripts/slick.min.js"></script>
-  <script src="scripts/rangeslider.min.js"></script>
-  <script src="scripts/bootstrap-select.min.js"></script>
-  <script src="scripts/magnific-popup.min.js"></script>
-  <script src="scripts/jquery-ui.min.js"></script>
-  <script src="scripts/mmenu.js"></script>
-  <script src="scripts/tooltips.min.js"></script>
-  <script src="scripts/color_switcher.js"></script>
-  <script src="scripts/jquery_custom.js"></script>
+  <script src="../scripts/jquery-3.4.1.min.js"></script>
+  <script src="../scripts/chosen.min.js"></script>
+  <script src="../scripts/perfect-scrollbar.min.js"></script>
+  <script src="../scripts/slick.min.js"></script>
+  <script src="../scripts/rangeslider.min.js"></script>
+  <script src="../scripts/bootstrap-select.min.js"></script>
+  <script src="../scripts/magnific-popup.min.js"></script>
+  <script src="../scripts/jquery-ui.min.js"></script>
+  <script src="../scripts/mmenu.js"></script>
+  <script src="../scripts/tooltips.min.js"></script>
+  <script src="../scripts/color_switcher.js"></script>
+  <script src="../scripts/jquery_custom.js"></script>
   <script>
     $(document).ready(function() {
       // $('#sub-category').html('<option value="">Select Category First</option>');
@@ -630,7 +630,7 @@
         // alert("hello");
         var category_id = this.value;
         $.ajax({
-          url: "sub_category_by_category.php",
+          url: "../service/sub_category_by_category.php",
           type: "POST",
           data: {
             category_id: category_id
@@ -678,7 +678,7 @@
         // alert("hello");
         var country_id = this.value;
         $.ajax({
-          url: "states-by-country.php",
+          url: "../service/states-by-country.php",
           type: "POST",
           data: {
             country_id: country_id
@@ -725,7 +725,7 @@
         // alert("hello");
 
         $.ajax({
-          url: "cities-by-state.php",
+          url: "../service/cities-by-state.php",
           type: "POST",
           data: {
             state_id: state_id
@@ -799,10 +799,10 @@
 
   <!-- Maps -->
   <!-- <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> -->
-  <script src="scripts/infobox.min.js"></script>
-  <script src="scripts/markerclusterer.js"></script>
-  <script src="scripts/maps.js"></script>
-  <!-- <script src="scripts/dropzone.js"></script> -->
+  <script src="../scripts/infobox.min.js"></script>
+  <script src="../scripts/markerclusterer.js"></script>
+  <script src="../scripts/maps.js"></script>
+  <!-- <script src="../scripts/dropzone.js"></script> -->
 </body>
 
 <!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/dashboard_add_listing.php by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:41:50 GMT -->

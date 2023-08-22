@@ -10,9 +10,30 @@ if (isset($_POST['edit_sub_category'])) {
         $category_id = $_POST['category_id'];
     }
 
-    foreach ($_POST as $key => $data) {
-        if ((strpos($key, "logo") !== false) && $data !="") {
-            $update_sub_category_query ="UPDATE `sub_category` SET `sub_category_image` = '$data' WHERE `sub_category`.`sub_category_id` = ".substr($key,10);
+    foreach ($_FILES as $key => $data) {
+        $sub_category_image = "";
+        // $sub_category_image = $data;
+        $sub_category_id = substr($key, 10);
+        
+        
+        if (isset($_FILES[$key])) {
+            if ("" != $_FILES[$key]["tmp_name"]) {
+                $sub_category_image = get_server_image_name($key);
+            }
+        }
+        
+        // echo $sub_category_id . " -> " . $sub_category_image . "<br>";
+        
+        
+        if ((strpos($key, "logo") !== false) && $sub_category_image != "") {
+            unlink_img('sub_category_image', 'sub_category', 'sub_category_id', $sub_category_id, $connect);
+
+            // echo $key . " -> " . $data . "<br>";
+            // echo $key . " -> " . $data . "<br>";
+            
+           
+
+            $update_sub_category_query = "UPDATE `sub_category` SET `sub_category_image` = '$sub_category_image' WHERE `sub_category`.`sub_category_id` = $sub_category_id ";
             // echo $update_sub_category_query ;
             // echo "<br>";
             try {
@@ -21,8 +42,6 @@ if (isset($_POST['edit_sub_category'])) {
                 // echo "Data insertion failed " . "<br>";
                 // echo 'Message: ' . $e->getMessage() . "<br>";
             }
-
-            
         }
     }
 }
@@ -40,12 +59,12 @@ if (isset($_POST['edit_sub_category'])) {
     <title>Add Listing</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../wp-content/uploads/data/favicon.png" />
+    <link rel="shortcut icon" href="../images/favicon.png" />
     <!-- Style CSS -->
-    <link rel="stylesheet" href="css/stylesheet.css" />
-    <link rel="stylesheet" href="css/mmenu.css" />
-    <link rel="stylesheet" href="css/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="css/style.css" id="colors" />
+    <link rel="stylesheet" href="../css/stylesheet.css" />
+    <link rel="stylesheet" href="../css/mmenu.css" />
+    <link rel="stylesheet" href="../css/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../css/style.css" id="colors" />
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css" />
@@ -94,7 +113,7 @@ if (isset($_POST['edit_sub_category'])) {
                     <div class="col-lg-12">
 
                         <div id="utf_add_listing_part">
-                            <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+                            <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
                                 <input type="hidden" name="edit_sub_category" id="edit_sub_category" value="edit_sub_category" />
                                 <div class="add_utf_listing_section margin-top-45" validate>
                                     <div class="utf_add_listing_part_headline_part">
@@ -167,18 +186,18 @@ if (isset($_POST['edit_sub_category'])) {
     </div>
 
     <!-- Scripts -->
-    <script src="scripts/jquery-3.4.1.min.js"></script>
-    <script src="scripts/chosen.min.js"></script>
-    <script src="scripts/perfect-scrollbar.min.js"></script>
-    <script src="scripts/slick.min.js"></script>
-    <script src="scripts/rangeslider.min.js"></script>
-    <script src="scripts/bootstrap-select.min.js"></script>
-    <script src="scripts/magnific-popup.min.js"></script>
-    <script src="scripts/jquery-ui.min.js"></script>
-    <script src="scripts/mmenu.js"></script>
-    <script src="scripts/tooltips.min.js"></script>
-    <script src="scripts/color_switcher.js"></script>
-    <script src="scripts/jquery_custom.js"></script>
+    <script src="../scripts/jquery-3.4.1.min.js"></script>
+    <script src="../scripts/chosen.min.js"></script>
+    <script src="../scripts/perfect-scrollbar.min.js"></script>
+    <script src="../scripts/slick.min.js"></script>
+    <script src="../scripts/rangeslider.min.js"></script>
+    <script src="../scripts/bootstrap-select.min.js"></script>
+    <script src="../scripts/magnific-popup.min.js"></script>
+    <script src="../scripts/jquery-ui.min.js"></script>
+    <script src="../scripts/mmenu.js"></script>
+    <script src="../scripts/tooltips.min.js"></script>
+    <script src="../scripts/color_switcher.js"></script>
+    <script src="../scripts/jquery_custom.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -223,10 +242,10 @@ if (isset($_POST['edit_sub_category'])) {
 
     <!-- Maps -->
     <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-    <script src="scripts/infobox.min.js"></script>
-    <script src="scripts/markerclusterer.js"></script>
-    <script src="scripts/maps.js"></script>
-    <script src="scripts/dropzone.js"></script>
+    <script src="../scripts/infobox.min.js"></script>
+    <script src="../scripts/markerclusterer.js"></script>
+    <script src="../scripts/maps.js"></script>
+    <script src="../scripts/dropzone.js"></script>
     <?php if (isset($_POST['addList'])) {
         try {
             $insert_listing_result = mysqli_query($connect, $insert_listing_query);

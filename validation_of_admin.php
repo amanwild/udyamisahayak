@@ -2,7 +2,11 @@
 <?php
 
 session_start();
-if (isset($_SESSION['user_username']) &&($_SESSION['user_type']=='admin')) {
+include "../service/filter_input.php";
+include "../service/upload_image.php";
+include "../service/unlink_image.php";
+if (isset($_SESSION['user_username']) &&($_SESSION['user_type']=='admin' || $_SESSION['user_type']=='data_analyst' || $_SESSION['user_type']=='inspector'|| $_SESSION['user_type']=='listing_manager' || $_SESSION['user_type']=='registration_manager' || $_SESSION['user_type']=='user_manager')) {
+  
   $user_first_name =$_SESSION['user_first_name'];
   $user_last_name = $_SESSION['user_last_name'];
   $user_email =$_SESSION['user_email'];

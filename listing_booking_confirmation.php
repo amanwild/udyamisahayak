@@ -161,7 +161,7 @@
             </ul>
             <div class="tab_container alt"> 
               <div class="tab_content" id="tab1" style="display:none;">
-                <form method="post" class="login">
+                <form enctype="multipart/form-data" method="post" class="login">
 				  <p class="utf_row_form utf_form_wide_block">
                     <label for="username">
                       <input type="text" class="input-text" name="username" id="username" value="" placeholder="Username" />
@@ -196,7 +196,7 @@
               </div>
               
               <div class="tab_content" id="tab2" style="display:none;">
-                <form method="post" class="register">
+                <form enctype="multipart/form-data" method="post" class="register">
                   <p class="utf_row_form utf_form_wide_block">
                     <label for="username2">
                       <input type="text" class="input-text" name="username" id="username2" value="" placeholder="Username" />
@@ -270,7 +270,7 @@
                     </div>
                     <div class="col-md-4 col-sm-5">
                         <div class="contact-form-action">
-                            <form method="post">
+                            <form enctype="multipart/form-data" method="post">
                                 <span class="la la-envelope-o"></span>
                                 <input class="form-control" type="email" placeholder="Enter your email" required="">
                                 <button class="utf_theme_btn" type="submit">Subscribe</button>

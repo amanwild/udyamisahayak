@@ -15,10 +15,10 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="../images/favicon.png" />
     <!-- Style CSS -->
-    <link rel="stylesheet" href="css/stylesheet.css" />
-    <link rel="stylesheet" href="css/mmenu.css" />
-    <link rel="stylesheet" href="css/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="css/style.css" id="colors" />
+    <link rel="stylesheet" href="../css/stylesheet.css" />
+    <link rel="stylesheet" href="../css/mmenu.css" />
+    <link rel="stylesheet" href="../css/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../css/style.css" id="colors" />
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css" />
@@ -70,7 +70,7 @@
                     <div class="col-lg-12">
 
                         <div id="utf_add_listing_part">
-                            <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+                            <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
                                 <input type="hidden" class="addCategory" id="addCategory" name="addCategory">
                                 <script>
                                     addCategory.value = true;
@@ -402,26 +402,26 @@
 
 
     <!-- Scripts -->
-    <script src="scripts/jquery-3.4.1.min.js"></script>
-    <script src="scripts/chosen.min.js"></script>
-    <script src="scripts/perfect-scrollbar.min.js"></script>
-    <script src="scripts/slick.min.js"></script>
-    <script src="scripts/rangeslider.min.js"></script>
-    <script src="scripts/bootstrap-select.min.js"></script>
-    <script src="scripts/magnific-popup.min.js"></script>
-    <script src="scripts/jquery-ui.min.js"></script>
-    <script src="scripts/mmenu.js"></script>
-    <script src="scripts/tooltips.min.js"></script>
-    <script src="scripts/color_switcher.js"></script>
-    <script src="scripts/jquery_custom.js"></script>
+    <script src="../scripts/jquery-3.4.1.min.js"></script>
+    <script src="../scripts/chosen.min.js"></script>
+    <script src="../scripts/perfect-scrollbar.min.js"></script>
+    <script src="../scripts/slick.min.js"></script>
+    <script src="../scripts/rangeslider.min.js"></script>
+    <script src="../scripts/bootstrap-select.min.js"></script>
+    <script src="../scripts/magnific-popup.min.js"></script>
+    <script src="../scripts/jquery-ui.min.js"></script>
+    <script src="../scripts/mmenu.js"></script>
+    <script src="../scripts/tooltips.min.js"></script>
+    <script src="../scripts/color_switcher.js"></script>
+    <script src="../scripts/jquery_custom.js"></script>
 
     <!-- Maps -->
     <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-    <script src="scripts/infobox.min.js"></script>
-    <script src="scripts/markerclusterer.js"></script>
-    <script src="scripts/maps.js"></script>
-    <script src="scripts/dropzone.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="../scripts/infobox.min.js"></script>
+    <script src="../scripts/markerclusterer.js"></script>
+    <script src="../scripts/maps.js"></script>
+    <script src="../scripts/dropzone.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script>
         function show_table() {
 
@@ -449,17 +449,18 @@
 
 
     <?php
-    function filter($string)
-    {
-        $string = str_replace("<", "&lt;", $string);
-        $string = str_replace(">", "&gt;", $string);
-        return $string;
-    }
 
     if (($_SERVER["REQUEST_METHOD"] == "POST") && (isset($_POST['addCategory']) && isset($_POST['category_name']))) {
 
         $category_name = filter($_POST["category_name"]);
-        $category_image = filter($_POST["category_image"]);
+        // $category_image = filter($_POST["category_image"]);
+        $category_image = '';
+
+        if (isset($_FILES['category_image'])) {
+            if ("" != $_FILES["category_image"]["tmp_name"]) {
+                $category_image = get_server_image_name('category_image');
+            }
+        }
         $sub_category_names = filter($_POST["subcategory_name"]);
         $category_color = filter($_POST["category_color"]);
 
@@ -538,7 +539,7 @@
 
     }
     ?>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script>
         function validation_for_category() {
             var category_name = document.getElementById("category_name");

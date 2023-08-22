@@ -14,10 +14,10 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="../images/favicon.png" />
   <!-- Style CSS -->
-  <link rel="stylesheet" href="css/stylesheet.css" />
-  <link rel="stylesheet" href="css/mmenu.css" />
-  <link rel="stylesheet" href="css/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="css/style.css" id="colors" />
+  <link rel="stylesheet" href="../css/stylesheet.css" />
+  <link rel="stylesheet" href="../css/mmenu.css" />
+  <link rel="stylesheet" href="../css/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../css/style.css" id="colors" />
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet" />
   <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css" /> -->
@@ -137,6 +137,29 @@
             if (isset($_POST["logo_image3"])) {
               $logo_image3 = $_POST['logo_image3'];
             }
+
+            $logo_image1 = "";
+            if (isset($_FILES['logo_image1'])) {
+              if ("" != $_FILES["logo_image1"]["tmp_name"]) {
+                unlink_img('listing_image', 'listing', 'listing_id', $listing_id, $connect);
+                $logo_image1 = get_server_image_name('logo_image1');
+              }
+            }
+            $logo_image2 = "";
+            if (isset($_FILES['logo_image2'])) {
+              if ("" != $_FILES["logo_image2"]["tmp_name"]) {
+                unlink_img('listing_image2', 'listing', 'listing_id', $listing_id, $connect);
+                $logo_image2 = get_server_image_name('logo_image2');
+              }
+            }
+            $logo_image3 = "";
+            if (isset($_FILES['logo_image3'])) {
+              if ("" != $_FILES["logo_image3"]["tmp_name"]) {
+                unlink_img('listing_image3', 'listing', 'listing_id', $listing_id, $connect);
+                $logo_image3 = get_server_image_name('logo_image3');
+              }
+            }
+
             // $listing_id = $_POST['listing_id'];
             // $user_id = $_POST['user_id'];
             // $listing_title = $_POST['listing_title'];
@@ -244,7 +267,7 @@
               <div class="col-lg-12">
 
                 <div id="utf_add_listing_part">
-                  <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+                  <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
 
                     <input type="hidden" id="edit_listing_user_id" name="edit_listing_user_id" value="<?= $user_id ?>" />
                     <input type="hidden" id="edit_listing_listing_id" name="edit_listing_listing_id" value="<?= $listing_id ?>" />
@@ -376,7 +399,7 @@
                       </div>
                       <div class="row with-forms">
 
-                        
+
                         <!-- <div class="col-md-6">
                           <label for="">Tags(optional)</label>
                           <div class="intro-search-field utf-chosen-cat-single">
@@ -522,11 +545,15 @@
 
                       <div class="row with-forms">
                         <div class="utf_submit_section col-md-4">
-                          <h4>Image (mendatory)</h4>
-                          <!-- <form></form> -->
+                          <h4>Update Image 1</h4>
+                          <!-- <form enctype="multipart/form-data" ></form> -->
                           <div class="">
-                            <input type="file" multiple accept="image/*,video/*" onchange="showimg(1);" name="logo_image1" id="logo_image1" >
+                            <input type="file" multiple accept="image/*,video/*" name="logo_image1" id="logo_image1">
                           </div>
+                          <?php if ($listing_image != "") {
+                          ?><h4>Present Image 1</h4><?php
+                                                  } ?>
+
                           <div class="">
                             <img style="<?php if ($listing_image != "") {
                                           echo 'display:block';
@@ -537,16 +564,22 @@
                                       echo "../images/" . $listing_image;
                                     } else {
                                       echo '';
-                                    } ?>" class="dropzone" name="view_logo_image1" id="view_logo_image1" src="" />
+                                    } ?>" />
                           </div>
+
+
                           </input>
                         </div>
                         <div class="utf_submit_section col-md-4">
-                          <h4>Image or Video</h4>
-                          <!-- <form></form> -->
+                          <h4>Update Image 1</h4>
+                          <!-- <form enctype="multipart/form-data" ></form> -->
                           <div class="">
-                            <input type="file" multiple accept="image/*,video/*" onchange="showimg(2);" name="logo_image2" id="logo_image2" >
+                            <input type="file" multiple accept="image/*,video/*" name="logo_image2" id="logo_image2">
                           </div>
+                          <?php if ($listing_image2 != "") {
+                          ?><h4>Present Image 1</h4><?php
+                                                  } ?>
+
                           <div class="">
                             <img style="<?php if ($listing_image2 != "") {
                                           echo 'display:block';
@@ -557,16 +590,22 @@
                                       echo "../images/" . $listing_image2;
                                     } else {
                                       echo '';
-                                    } ?>" class="dropzone" name="view_logo_image2" id="view_logo_image2" src="" />
+                                    } ?>" />
                           </div>
+
+
                           </input>
                         </div>
                         <div class="utf_submit_section col-md-4">
-                          <h4>Image or Video</h4>
-                          <!-- <form></form> -->
+                          <h4>Update Image 1</h4>
+                          <!-- <form enctype="multipart/form-data" ></form> -->
                           <div class="">
-                            <input type="file" multiple accept="image/*,video/*" onchange="showimg(3);" name="logo_image3" id="logo_image3" >
+                            <input type="file" multiple accept="image/*,video/*" name="logo_image3" id="logo_image3">
                           </div>
+                          <?php if ($listing_image3 != "") {
+                          ?><h4>Present Image 1</h4><?php
+                                                  } ?>
+
                           <div class="">
                             <img style="<?php if ($listing_image3 != "") {
                                           echo 'display:block';
@@ -577,21 +616,15 @@
                                       echo "../images/" . $listing_image3;
                                     } else {
                                       echo '';
-                                    } ?>" class="dropzone" name="view_logo_image3" id="view_logo_image3" src="" />
+                                    } ?>" />
                           </div>
+
+
                           </input>
                         </div>
-                        <script>
-                          function showimg(id) {
-                            document.getElementById("view_logo_image" + id).style.display = "block";
-                            var x = (document.getElementById("logo_image" + id).value).slice(12, 100);
-                            console.log(x);
-                            document.getElementById("view_logo_image" + id).src = "../images/" + x;
-                            // alert("hello");
-                          }
-                        </script>
-
                       </div>
+
+                    
                     </div> <!-- <a href="#" class="button preview">Save </a> -->
                     <button type="submit" class="button preview" id="submit">Save</button>
                   </form>
@@ -615,18 +648,18 @@
   </div>
 
   <!-- Scripts -->
-  <script src="scripts/jquery-3.4.1.min.js"></script>
-  <script src="scripts/chosen.min.js"></script>
-  <script src="scripts/perfect-scrollbar.min.js"></script>
-  <script src="scripts/slick.min.js"></script>
-  <script src="scripts/rangeslider.min.js"></script>
-  <script src="scripts/bootstrap-select.min.js"></script>
-  <script src="scripts/magnific-popup.min.js"></script>
-  <script src="scripts/jquery-ui.min.js"></script>
-  <script src="scripts/mmenu.js"></script>
-  <script src="scripts/tooltips.min.js"></script>
-  <script src="scripts/color_switcher.js"></script>
-  <script src="scripts/jquery_custom.js"></script>
+  <script src="../scripts/jquery-3.4.1.min.js"></script>
+  <script src="../scripts/chosen.min.js"></script>
+  <script src="../scripts/perfect-scrollbar.min.js"></script>
+  <script src="../scripts/slick.min.js"></script>
+  <script src="../scripts/rangeslider.min.js"></script>
+  <script src="../scripts/bootstrap-select.min.js"></script>
+  <script src="../scripts/magnific-popup.min.js"></script>
+  <script src="../scripts/jquery-ui.min.js"></script>
+  <script src="../scripts/mmenu.js"></script>
+  <script src="../scripts/tooltips.min.js"></script>
+  <script src="../scripts/color_switcher.js"></script>
+  <script src="../scripts/jquery_custom.js"></script>
   <script>
     $(document).ready(function() {
       // $('#sub-category').html('<option value="">Select Category First</option>');
@@ -636,7 +669,7 @@
         // alert("hello");
         var category_id = this.value;
         $.ajax({
-          url: "sub_category_by_category.php",
+          url: "../service/sub_category_by_category.php",
           type: "POST",
           data: {
             category_id: category_id
@@ -684,7 +717,7 @@
         // alert("hello");
         var country_id = this.value;
         $.ajax({
-          url: "states-by-country.php",
+          url: "../service/states-by-country.php",
           type: "POST",
           data: {
             country_id: country_id
@@ -731,7 +764,7 @@
         // alert("hello");
 
         $.ajax({
-          url: "cities-by-state.php",
+          url: "../service/cities-by-state.php",
           type: "POST",
           data: {
             state_id: state_id
@@ -805,10 +838,10 @@
 
   <!-- Maps -->
   <!-- <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> -->
-  <script src="scripts/infobox.min.js"></script>
-  <script src="scripts/markerclusterer.js"></script>
-  <script src="scripts/maps.js"></script>
-  <!-- <script src="scripts/dropzone.js"></script> -->
+  <script src="../scripts/infobox.min.js"></script>
+  <script src="../scripts/markerclusterer.js"></script>
+  <script src="../scripts/maps.js"></script>
+  <!-- <script src="../scripts/dropzone.js"></script> -->
 </body>
 
 <!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/dashboard_add_listing.php by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:41:50 GMT -->

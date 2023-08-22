@@ -13,12 +13,12 @@
   <title>Add Lisiting</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="../wp-content/uploads/data/favicon.png" />
+  <link rel="shortcut icon" href="../images/favicon.png" />
   <!-- Style CSS -->
-  <link rel="stylesheet" href="css/stylesheet.css" />
-  <link rel="stylesheet" href="css/mmenu.css" />
-  <link rel="stylesheet" href="css/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="css/style.css" id="colors" />
+  <link rel="stylesheet" href="../css/stylesheet.css" />
+  <link rel="stylesheet" href="../css/mmenu.css" />
+  <link rel="stylesheet" href="../css/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../css/style.css" id="colors" />
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css" />
@@ -98,17 +98,23 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
   }
 
   $logo_image1 = "";
-  if (isset($_POST["logo_image1"])) {
-    $logo_image1 = $_POST['logo_image1'];
-  }
+  if (isset($_FILES['logo_image1'])) {
+		if ("" != $_FILES["logo_image1"]["tmp_name"]) {
+			$logo_image1 = get_server_image_name('logo_image1');
+		}
+	}
   $logo_image2 = "";
-  if (isset($_POST["logo_image2"])) {
-    $logo_image2 = $_POST['logo_image2'];
-  }
+  if (isset($_FILES['logo_image2'])) {
+		if ("" != $_FILES["logo_image2"]["tmp_name"]) {
+			$logo_image2 = get_server_image_name('logo_image2');
+		}
+	}
   $logo_image3 = "";
-  if (isset($_POST["logo_image3"])) {
-    $logo_image3 = $_POST['logo_image3'];
-  }
+  if (isset($_FILES['logo_image3'])) {
+		if ("" != $_FILES["logo_image3"]["tmp_name"]) {
+			$logo_image3 = get_server_image_name('logo_image3');
+		}
+	}
 
  include "../service/db.php";
   try {
@@ -194,7 +200,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
           <div class="col-lg-12">
 
             <div id="utf_add_listing_part">
-              <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+              <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
                 <input type="hidden" name="addList" id="addList" value="addList" />
                 <div class="add_utf_listing_section margin-top-45" validate>
                   <div class="utf_add_listing_part_headline_part">
@@ -370,7 +376,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
                       <h4>Image 1</h4>
                       <!-- <form></form> -->
                       <div class="">
-                        <input type="file" onchange="showimg(1);" name="logo_image1" id="logo_image1" >
+                        <input type="file"  name="logo_image1" id="logo_image1" >
                       </div>
                       <div class="">
                         <img style="display:none" class="dropzone" name="view_logo_image1" id="view_logo_image1" src="" />
@@ -381,7 +387,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
                       <h4>Image 2</h4>
                       <!-- <form></form> -->
                       <div class="">
-                        <input type="file" onchange="showimg(2);" name="logo_image2" id="logo_image2" >
+                        <input type="file"  name="logo_image2" id="logo_image2" >
                       </div>
                       <div class="">
                         <img style="display:none" class="dropzone" name="view_logo_image2" id="view_logo_image2" src="" />
@@ -392,22 +398,13 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
                       <h4>Image 3</h4>
                       <!-- <form></form> -->
                       <div class="">
-                        <input type="file" onchange="showimg(3);" name="logo_image3" id="logo_image3" >
+                        <input type="file"  name="logo_image3" id="logo_image3" >
                       </div>
                       <div class="">
                         <img style="display:none" class="dropzone" name="view_logo_image3" id="view_logo_image3" src="" />
                       </div>
                       </input>
                     </div>
-                    <script>
-                      function showimg(id) {
-                        document.getElementById("view_logo_image" + id).style.display = "block";
-                        var x = (document.getElementById("logo_image"+id).value).slice(12, 100);
-                        console.log(x);
-                        document.getElementById("view_logo_image" + id).src = "../images/" + x;
-                        // alert("hello");
-                      }
-                    </script>
 
                   </div>
                 </div> <!-- <a href="#" class="button preview">Save </a> -->
@@ -422,18 +419,18 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
   </div>
 
   <!-- Scripts -->
-  <script src="scripts/jquery-3.4.1.min.js"></script>
-  <script src="scripts/chosen.min.js"></script>
-  <script src="scripts/perfect-scrollbar.min.js"></script>
-  <script src="scripts/slick.min.js"></script>
-  <script src="scripts/rangeslider.min.js"></script>
-  <script src="scripts/bootstrap-select.min.js"></script>
-  <script src="scripts/magnific-popup.min.js"></script>
-  <script src="scripts/jquery-ui.min.js"></script>
-  <script src="scripts/mmenu.js"></script>
-  <script src="scripts/tooltips.min.js"></script>
-  <script src="scripts/color_switcher.js"></script>
-  <script src="scripts/jquery_custom.js"></script>
+  <script src="../scripts/jquery-3.4.1.min.js"></script>
+  <script src="../scripts/chosen.min.js"></script>
+  <script src="../scripts/perfect-scrollbar.min.js"></script>
+  <script src="../scripts/slick.min.js"></script>
+  <script src="../scripts/rangeslider.min.js"></script>
+  <script src="../scripts/bootstrap-select.min.js"></script>
+  <script src="../scripts/magnific-popup.min.js"></script>
+  <script src="../scripts/jquery-ui.min.js"></script>
+  <script src="../scripts/mmenu.js"></script>
+  <script src="../scripts/tooltips.min.js"></script>
+  <script src="../scripts/color_switcher.js"></script>
+  <script src="../scripts/jquery_custom.js"></script>
   <script>
     //   $(document).ready(function() {
     //     $('#country').on('change', function() {
@@ -454,7 +451,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
         // alert("hello");
         var category_id = this.value;
         $.ajax({
-          url: "sub_category_by_category.php",
+          url: "../service/sub_category_by_category.php",
           type: "POST",
           data: {
             category_id: category_id
@@ -471,7 +468,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
       //   // alert("hello");
       //   var country_id = this.value;
       //   $.ajax({
-      //     url: "states-by-country.php",
+      //     url: "../service/states-by-country.php",
       //     type: "POST",
       //     data: {
       //       country_id: country_id
@@ -488,7 +485,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
       // $('#state').on('change', function() {
       //   var state_id = this.value;
       //   $.ajax({
-      //     url: "cities-by-state.php",
+      //     url: "../service/cities-by-state.php",
       //     type: "POST",
       //     data: {
       //       state_id: state_id
@@ -506,7 +503,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
         // alert("hello");
 
         $.ajax({
-          url: "cities-by-state.php",
+          url: "../service/cities-by-state.php",
           type: "POST",
           data: {
             state_id: state_id
@@ -547,10 +544,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["addList"]) && $_POST
 
   <!-- Maps -->
   <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-  <script src="scripts/infobox.min.js"></script>
-  <script src="scripts/markerclusterer.js"></script>
-  <script src="scripts/maps.js"></script>
-  <script src="scripts/dropzone.js"></script>
+  <script src="../scripts/infobox.min.js"></script>
+  <script src="../scripts/markerclusterer.js"></script>
+  <script src="../scripts/maps.js"></script>
+  <script src="../scripts/dropzone.js"></script>
 </body>
 
 <!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/dashboard_add_listing.php by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:41:50 GMT -->

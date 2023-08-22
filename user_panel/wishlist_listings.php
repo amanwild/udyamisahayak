@@ -12,9 +12,9 @@
 <!-- Favicon -->
 <link rel="shortcut icon" href="images/favicon.png">
 <!-- Style CSS -->
-<link rel="stylesheet" href="css/stylesheet.css">
-<link rel="stylesheet" href="css/mmenu.css">
-<link rel="stylesheet" href="css/style.css" id="colors">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="../css/mmenu.css">
+<link rel="stylesheet" href="../css/style.css" id="colors">
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
@@ -161,7 +161,7 @@
             </ul>
             <div class="tab_container alt"> 
               <div class="tab_content" id="tab1" style="display:none;">
-                <form method="post" class="login">
+                <form enctype="multipart/form-data" method="post" class="login">
 				  <p class="utf_row_form utf_form_wide_block">
                     <label for="username">
                       <input type="text" class="input-text" name="username" id="username" value="" placeholder="Username" />
@@ -196,7 +196,7 @@
               </div>
               
               <div class="tab_content" id="tab2" style="display:none;">
-                <form method="post" class="register">
+                <form enctype="multipart/form-data" method="post" class="register">
                   <p class="utf_row_form utf_form_wide_block">
                     <label for="username2">
                       <input type="text" class="input-text" name="username" id="username2" value="" placeholder="Username" />
@@ -398,7 +398,7 @@
                     </div>
                     <div class="col-md-4 col-sm-5">
                         <div class="contact-form-action">
-                            <form method="post">
+                            <form enctype="multipart/form-data" method="post">
                                 <span class="la la-envelope-o"></span>
                                 <input class="form-control" type="email" placeholder="Enter your email" required="">
                                 <button class="utf_theme_btn" type="submit">Subscribe</button>
@@ -469,22 +469,22 @@
 </div>
 
 <!-- Scripts --> 
-<script src="scripts/jquery-3.4.1.min.js"></script> 
-<script src="scripts/chosen.min.js"></script> 
-<script src="scripts/slick.min.js"></script> 
-<script src="scripts/rangeslider.min.js"></script> 
-<script src="scripts/magnific-popup.min.js"></script> 
-<script src="scripts/jquery-ui.min.js"></script> 
-<script src="scripts/mmenu.js"></script>
-<script src="scripts/tooltips.min.js"></script> 
-<script src="scripts/color_switcher.js"></script>
-<script src="scripts/jquery_custom.js"></script>
+<script src="../scripts/jquery-3.4.1.min.js"></script> 
+<script src="../scripts/chosen.min.js"></script> 
+<script src="../scripts/slick.min.js"></script> 
+<script src="../scripts/rangeslider.min.js"></script> 
+<script src="../scripts/magnific-popup.min.js"></script> 
+<script src="../scripts/jquery-ui.min.js"></script> 
+<script src="../scripts/mmenu.js"></script>
+<script src="../scripts/tooltips.min.js"></script> 
+<script src="../scripts/color_switcher.js"></script>
+<script src="../scripts/jquery_custom.js"></script>
 
 <!-- Maps --> 
 <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> 
-<script src="scripts/infobox.min.js"></script> 
-<script src="scripts/markerclusterer.js"></script> 
-<script src="scripts/maps.js"></script>
+<script src="../scripts/infobox.min.js"></script> 
+<script src="../scripts/markerclusterer.js"></script> 
+<script src="../scripts/maps.js"></script>
 
 <!-- Style Switcher -->
 <div id="color_switcher_preview">

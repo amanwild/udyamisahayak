@@ -12,9 +12,9 @@
 <!-- Favicon -->
 <link rel="shortcut icon" href="images/favicon.png">
 <!-- Style CSS -->
-<link rel="stylesheet" href="css/stylesheet.css">
-<link rel="stylesheet" href="css/mmenu.css">
-<link rel="stylesheet" href="css/style.css" id="colors">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="../css/mmenu.css">
+<link rel="stylesheet" href="../css/style.css" id="colors">
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
@@ -164,15 +164,15 @@
               <div class="row with-forms">              
 				  <div class="utf_submit_section col-md-4">
 				    <h4>Logo</h4>
-					<form action="http://ulisting.utouchdesign.com/ulisting_ltr/file-upload" class="dropzone"></form>
+					<form enctype="multipart/form-data" action="http://ulisting.utouchdesign.com/ulisting_ltr/file-upload" class="dropzone"></form>
 				  </div>
 				  <div class="utf_submit_section col-md-4">
 					<h4>Cover Image</h4>
-					<form action="http://ulisting.utouchdesign.com/ulisting_ltr/file-upload" class="dropzone"></form>
+					<form enctype="multipart/form-data" action="http://ulisting.utouchdesign.com/ulisting_ltr/file-upload" class="dropzone"></form>
 				  </div>
 				  <div class="utf_submit_section col-md-4">
 					<h4>Gallery Images</h4>
-					<form action="http://ulisting.utouchdesign.com/ulisting_ltr/file-upload" class="dropzone"></form>
+					<form enctype="multipart/form-data" action="http://ulisting.utouchdesign.com/ulisting_ltr/file-upload" class="dropzone"></form>
 				  </div>
 			  </div>	  
             </div> 
@@ -446,7 +446,7 @@
                     </div>
                     <div class="col-md-4 col-sm-5">
                         <div class="contact-form-action">
-                            <form method="post">
+                            <form enctype="multipart/form-data" method="post">
                                 <span class="la la-envelope-o"></span>
                                 <input class="form-control" type="email" placeholder="Enter your email" required="">
                                 <button class="utf_theme_btn" type="submit">Subscribe</button>
@@ -517,17 +517,17 @@
 </div>
 
 <!-- Scripts --> 
-<script src="scripts/jquery-3.4.1.min.js"></script> 
-<script src="scripts/chosen.min.js"></script> 
-<script src="scripts/slick.min.js"></script> 
-<script src="scripts/rangeslider.min.js"></script> 
-<script src="scripts/bootstrap-select.min.js"></script>
-<script src="scripts/magnific-popup.min.js"></script> 
-<script src="scripts/jquery-ui.min.js"></script> 
-<script src="scripts/mmenu.js"></script>
-<script src="scripts/tooltips.min.js"></script> 
-<script src="scripts/color_switcher.js"></script>
-<script src="scripts/jquery_custom.js"></script>
+<script src="../scripts/jquery-3.4.1.min.js"></script> 
+<script src="../scripts/chosen.min.js"></script> 
+<script src="../scripts/slick.min.js"></script> 
+<script src="../scripts/rangeslider.min.js"></script> 
+<script src="../scripts/bootstrap-select.min.js"></script>
+<script src="../scripts/magnific-popup.min.js"></script> 
+<script src="../scripts/jquery-ui.min.js"></script> 
+<script src="../scripts/mmenu.js"></script>
+<script src="../scripts/tooltips.min.js"></script> 
+<script src="../scripts/color_switcher.js"></script>
+<script src="../scripts/jquery_custom.js"></script>
 
 <!-- Style Switcher -->
 <div id="color_switcher_preview">
@@ -546,9 +546,9 @@
  
 <!-- Maps --> 
 <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> 
-<script src="scripts/infobox.min.js"></script> 
-<script src="scripts/markerclusterer.js"></script> 
-<script src="scripts/maps.js"></script>
+<script src="../scripts/infobox.min.js"></script> 
+<script src="../scripts/markerclusterer.js"></script> 
+<script src="../scripts/maps.js"></script>
 <script>
 $(".utf_opening_day.utf_js_demo_hours .utf_chosen_select").each(function() {
 	$(this).append(''+
@@ -580,7 +580,7 @@ $(".utf_opening_day.utf_js_demo_hours .utf_chosen_select").each(function() {
         '<option>12 PM</option>');
 });
 </script> 
-<script src="scripts/dropzone.js"></script>
+<script src="../scripts/dropzone.js"></script>
 </body>
 
 <!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/add_listing.php by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:43:50 GMT -->

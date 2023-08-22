@@ -48,10 +48,10 @@ if($total_view_result){
   <div id="header" class="not-sticky">
     <div class="container">
       <div class="utf_left_side">
-        <div id="logo">
-          <a href="../index.php"><img src="../wp-content/uploads/2021/12/logo-grid-3 (2).png" alt="" /></a>
+      <div id="logo">
+          <a href="../index.php" style="font-size:20px;padding:10px;padding-top:15px">𝕌𝕕𝕪𝕒𝕞𝕚𝕊𝕒𝕙𝕒𝕪𝕒𝕜</a>
 
-          <a href="../index.php" class="dashboard-logo"><img src="../wp-content/uploads/2021/12/logo-grid-3 (2).png" alt="" /></a>
+          <a href="../index.php" class="dashboard-logo" style="font-size:20px;padding:10px;padding-top:15px;color:white">𝕌𝕕𝕪𝕒𝕞𝕚𝕊𝕒𝕙𝕒𝕪𝕒𝕜</a>
         </div>
         <div class="mmenu-trigger">
 
@@ -142,14 +142,14 @@ if($total_view_result){
                 }
               } else {
                 if (isset($_SESSION['user_image'])) {
-                  echo "../wp-content/uploads/data/" . $_SESSION['user_image'];
+                  echo "../images/" . $_SESSION['user_image'];
                 } else {
-                  echo "../wp-content/uploads/data/dashboard-avatar.jpg";
+                  echo "../images/dashboard-avatar.jpg";
                 }
               }
               ?>" alt="" /></span>
-              <!-- <span><img src="../wp-content/uploads/data/dashboard-avatar.jpg" alt="" /></span> -->
-              <!-- <span><img src="../wp-content/uploads/data/dummy_profile_img.webp" alt="" /></span
+              <!-- <span><img src="../images/dashboard-avatar.jpg" alt="" /></span> -->
+              <!-- <span><img src="../images/dummy_profile_img.webp" alt="" /></span
                       >Hi, John! -->
             </div>
             <ul>

@@ -60,9 +60,9 @@
           </div>
           <div class="utf_user_menu">
             <div class="utf_user_name">
-              <span><img src="<?php if($_SESSION['user_image']!=""){echo $_SESSION['user_image'] ;}else{ echo"../wp-content/uploads/data/dashboard-avatar.jpg" ;}?>"  alt="" /></span>
-              <!-- <span><img src="../wp-content/uploads/data/dashboard-avatar.jpg" alt="" /></span> -->
-              <!-- <span><img src="../wp-content/uploads/data/dummy_profile_img.webp" alt="" /></span
+              <span><img src="<?php if($_SESSION['user_image']!=""){echo $_SESSION['user_image'] ;}else{ echo"../images/dashboard-avatar.jpg" ;}?>"  alt="" /></span>
+              <!-- <span><img src="../images/dashboard-avatar.jpg" alt="" /></span> -->
+              <!-- <span><img src="../images/dummy_profile_img.webp" alt="" /></span
                       >Hi, John! -->
             </div>
             <ul>

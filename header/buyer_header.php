@@ -6,7 +6,9 @@
   <div id="header">
     <div class="container">
       <div class="utf_left_side">
-        <div id="logo"> <a href="index.php" style="cursor:pointer"><img src="" alt=""></a> 𝕌𝕕𝕪𝕒𝕞𝕚𝕊𝕒𝕙𝕒𝕪𝕒𝕜</div>
+        <!-- <div id="logo"> <a href="index.php" style="cursor:pointer"><img src="" alt=""></a> 𝕌𝕕𝕪𝕒𝕞𝕚𝕊𝕒𝕙𝕒𝕪𝕒𝕜</div> -->
+        <div id="logo"> <a href="index.php" style="cursor:pointer"> <img src='./images/mgiri.png' style="padding:5px;max-height:40px;width:auto;"></img>
+          </a> </div>
         <div class="mmenu-trigger">
           <button class="hamburger utfbutton_collapse" type="button">
             <span class="utf_inner_button_box">

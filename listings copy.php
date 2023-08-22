@@ -8,7 +8,7 @@ $category_id = $_GET['category_id'];
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/listings_list_full_width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:21:13 GMT -->
+
 
 <head>
 
@@ -381,7 +381,7 @@ $category_id = $_GET['category_id'];
                   </div>
                   <hr class="my-3" style="margin-top:20px;margin-bottom:20px;">
                   <div class="social-login-v2 login-register">
-                    <form id="enquery_form" method="POST" class="text-center">
+                    <form enctype="multipart/form-data" id="enquery_form" method="POST" class="text-center">
 
                       <div class="form-group">
                         <div class="inner-addon left-addon">
@@ -481,7 +481,7 @@ $category_id = $_GET['category_id'];
   <script src="scripts/markerclusterer.js"></script>
   <script src="scripts/maps.js"></script>
 
-  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> -->
 
   <script type="text/javascript">
     function update_enquery(listing_id) {
@@ -802,6 +802,6 @@ $category_id = $_GET['category_id'];
   </script>
 </body>
 
-<!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/listings_list_full_width.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Apr 2023 11:21:13 GMT -->
+
 
 </html>

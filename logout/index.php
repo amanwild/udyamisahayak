@@ -11,7 +11,7 @@ try {
     // start_session();
     //logout.php
     if (isset($_SESSION["access_token"])) {
-        include('../login/config.php');
+        include('../php_mailer_config/config.php');
         $google_client->revokeToken();
 
     }
@@ -29,7 +29,8 @@ try {
     echo "<br>";
 
     // echo"Please set Session variables from "set or start session"to log in";    echo"<br>";
-    header("location: /udyamisahayak/index.php");
+    // header("location: /udyamisahayak/index.php");
+    header("location: ../login.php");
 } catch (\Throwable $th) {
     $Logout_result = 0;
 }

@@ -201,22 +201,22 @@ if (!isset($_SESSION['access_token'])) {
   <!-- Favicon -->
   <link rel="shortcut icon" href="images/favicon.png">
   <!-- Style CSS -->
-  <link rel="stylesheet" href="css/stylesheet.css">
-  <link rel="stylesheet" href="css/mmenu.css">
-  <link rel="stylesheet" href="css/style.css" id="colors">
+  <link rel="stylesheet" href="../css/stylesheet.css">
+  <link rel="stylesheet" href="../css/mmenu.css">
+  <link rel="stylesheet" href="../css/style.css" id="colors">
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
   <!-- ****NEW**-->
-  <link type="text/css" rel="stylesheet" href="css/im-homepage-v39.min.css">
+  <link type="text/css" rel="stylesheet" href="../css/im-homepage-v39.min.css">
   <!--chrome-->
-  <link href="css/styles.css" rel="stylesheet" type="text/css">
-  <link href="css/styles2.css" rel="stylesheet" type="text/css">
-  <link href="css/styles3.css" rel="stylesheet" type="text/css">
-  <link href="css/grid.css" rel="stylesheet" type="text/css">
-  <link href="css/reset.css" rel="stylesheet" type="text/css">
-  <link href="css/stylenew.css" rel="stylesheet" type="text/css">
-  <link href="css/thumbs.css" rel="stylesheet" type="text/css">
+  <link href="../css/styles.css" rel="stylesheet" type="text/css">
+  <link href="../css/styles2.css" rel="stylesheet" type="text/css">
+  <link href="../css/styles3.css" rel="stylesheet" type="text/css">
+  <link href="../css/grid.css" rel="stylesheet" type="text/css">
+  <link href="../css/reset.css" rel="stylesheet" type="text/css">
+  <link href="../css/stylenew.css" rel="stylesheet" type="text/css">
+  <link href="../css/thumbs.css" rel="stylesheet" type="text/css">
 
 
 
@@ -227,14 +227,14 @@ if (!isset($_SESSION['access_token'])) {
 
   <link rel="icon" href="images/favicon.ico">
   <link rel="shortcut icon" href="images/favicon.ico" />
-  <link rel="stylesheet" href="css/form.css">
-  <link rel="stylesheet" href="css/thumbs.css">
-  <link rel="stylesheet" href="css/slider.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/form.css">
+  <link rel="stylesheet" href="../css/thumbs.css">
+  <link rel="stylesheet" href="../css/slider.css">
+  <link rel="stylesheet" href="../css/style.css">
 
   <!--JS-->
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery-migrate-1.2.1.js"></script>
+  <!-- <script src="js/jquery.js"></script>
+  <script src="js/jquery-migrate-1.2.1.js"></script> -->
   <script src="js/script.js"></script>
 <script src="js/superfish.js"></script>
 <script src="js/sForm.js"></script>
@@ -284,7 +284,7 @@ if (!isset($_SESSION['access_token'])) {
 
     <div class="clearfix"></div>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 
@@ -393,7 +393,7 @@ if (!isset($_SESSION['access_token'])) {
 
 
           <div class="tab_content" id="tab2">
-            <form method="post" class="register">
+            <form enctype="multipart/form-data" method="post" class="register">
               <p class="utf_row_form utf_form_wide_block">
                 <label for="register_first_name">
                   <input class="input-text" type="text" name="register_first_name" id="register_first_name" placeholder="First Name" />

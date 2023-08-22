@@ -6,7 +6,9 @@
   <div id="header">
     <div class="container">
       <div class="utf_left_side">
-        <div id="logo"> <a href="index.php" style="cursor:pointer">𝕌𝕕𝕪𝕒𝕞𝕚𝕊𝕒𝕙𝕒𝕪𝕒𝕜</a> </div>
+        <!-- <div id="logo"> <a href="index.php" style="cursor:pointer">𝕌𝕕𝕪𝕒𝕞𝕚𝕊𝕒𝕙𝕒𝕪𝕒𝕜</a> </div> -->
+        <div id="logo"> <a href="index.php" style="cursor:pointer"> <img src='./images/mgiri.png' style="padding:5px;max-height:40px;width:auto;"></img>
+          </a> </div>
         <div class="mmenu-trigger">
           <button class="hamburger utfbutton_collapse" type="button">
             <span class="utf_inner_button_box">
@@ -16,7 +18,7 @@
         </div>
         <nav id="navigation" class="style_one">
           <ul id="responsive">
-            <li><a  id="navbar_tab_home" href="index.php">Home</a>
+            <li><a id="navbar_tab_home" href="index.php">Home</a>
             </li>
             <?php
             $select_category_query = "SELECT * FROM `category` where category_id in (132,131) ORDER BY category_since DESC"; //NOTE: here (`) is not equal to (')
@@ -62,9 +64,8 @@
       </div>
       <div class="utf_right_side">
         <div class="header_widget">
-        <a href="./logout/index.php" class="button border sign-in "><i class="fa fa-sign-in"></i> Logout</a> 
+          <a href="./logout/index.php" class="button border sign-in "><i class="fa fa-sign-in"></i> Logout</a>
           <!-- <a href="./register.php" class="button border "><i class="sl sl-icon-user"></i> Register</a> -->
-          
         </div>
       </div>
     </div>

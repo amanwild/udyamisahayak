@@ -45,8 +45,8 @@
   <link rel="stylesheet" href="css/style.css">
 
   <!--JS-->
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery-migrate-1.2.1.js"></script>
+  <!-- <script src="js/jquery.js"></script>
+  <script src="js/jquery-migrate-1.2.1.js"></script> -->
   <!--<script src="js/script.js"></script>
 <script src="js/superfish.js"></script>
 <script src="js/sForm.js"></script>
@@ -87,6 +87,9 @@
       top: -9px;
       right: 0;
     }
+    /* .hCathd:hover {
+      color:#ff2222;
+    } */
   </style>
 
 
@@ -205,11 +208,11 @@
               <h4>Welcome to UdyamiSahayak</h4>
 
 
-<?php include "./component/searchbar.php";?>
+              <?php include "./component/searchbar.php"; ?>
 
 
 
-              <div class="main_popular_categories">
+              <!-- <div class="main_popular_categories">
                 <h3>Or Browse Popular Categories</h3>
                 <ul class="main_popular_categories_list">
 
@@ -233,7 +236,6 @@
                     while ($row = mysqli_fetch_assoc($select_category_result)) {
                   ?>
 
-                      <!-- <option value=" "><?= $row['category_name'] ?></option> -->
                       <li> <a href="sub_category.php?category_id=<?php echo $row["category_id"]; ?>">
                           <div class="utf_box"> <img src="./images/<?= $row['category_image'] ?>" style="max-width:26px;max-height:26px;">
                             <p><?= $row['category_name'] ?></p>
@@ -246,14 +248,14 @@
                   ?>
 
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <marquee class="sampleMarquee" direction="left" scrollamount="10" behavior="scroll"> Todays News </marquee>
+    <marquee class="sampleMarquee" direction="left" scrollamount="10" behavior="scroll"> Latest News </marquee>
 
 
     <div class="container">
@@ -296,14 +298,15 @@
                 } catch (Exception $e) {
                   $mess = $e->getMessage();
                 }
+                if ($num_for_listing_count > 0) {
             ?>
+                  <a href="sub_category.php?category_id=<?php echo $row["category_id"]; ?>" class="utf_category_small_box_part"> <img src="./images/<?= $row['category_image'] ?>" class="im" style="max-width:26px;max-height:26px;margin:auto">
+                    <h4><?= $row['category_name'] ?></h4>
+                    <span><?= $num_for_listing_count ?></span>
+                  </a>
 
-
-                <a href="sub_category.php?category_id=<?php echo $row["category_id"]; ?>" class="utf_category_small_box_part"> <img src="./images/<?= $row['category_image'] ?>" class="im" style="max-width:26px;max-height:26px;margin:auto">
-                  <h4><?= $row['category_name'] ?></h4>
-                  <span><?= $num_for_listing_count ?></span>
-                </a>
             <?php }
+              }
             }
 
             ?>
@@ -431,66 +434,36 @@
     while ($row_for_category = mysqli_fetch_assoc($select_category_result)) {
       $category_name = $row_for_category['category_name'];
       $category_id = $row_for_category['category_id'];
+      $show_banner_of_category = false;
+
   ?>
 
-      <!-- <option value=" "><?= $row_for_category['category_name'] ?></option> -->
-      <!-- <li> <a href="sub_category.php?category_id=<?= $row_for_category["category_id"] ?>">
-          <div class="utf_box"> <img src="./images/<?= $row_for_category['category_image'] ?>" style="max-width:26px;max-height:26px;">
-            <p><?= $row_for_category['category_name'] ?></p>
-          </div>
-        </a>
-      </li> -->
-      <section class="products">
+      <section class="products" id="banner_category_<?= $category_id ?>">
         <div class="container">
           <div class="product-sec-wrapper" style="border: 50px;">
-            <h2><a class="hCathd" href="sub_category.php?category_id=<?= $row_for_category["category_id"] ?>"> <?= $row_for_category["category_name"] ?> </a></h2>
-            <div class="minht cBFlex" id="1">
-              <div class="product-banner  pbnr1">
-                <div class="banner-content">
-                  <ul>
 
-                    <?php
-                    $num_for_sub_category = 0;
-                    $select_sub_category_query = "SELECT * FROM `sub_category` WHERE  sub_category_category_id = " . $row_for_category['category_id'] . " LIMIT 2";
-                    try {
-                      $select_sub_category_result = mysqli_query($connect, $select_sub_category_query);
-                    } catch (Exception $e) {
-                      // echo "Data insertion failed " . "<br>";
-                      // echo 'Message: ' . $e->getMessage() . "<br>";
-                    }
-                    // echo $select_sub_category_query;
-                    if ($select_sub_category_result) {
-                      $num_for_sub_category = mysqli_num_rows($select_sub_category_result);
-                    }
-                    if ($num_for_sub_category > 0) {
-                      $sno = 0;
-                      while ($row_for_sub_category = mysqli_fetch_assoc($select_sub_category_result)) {
-                    ?>
-                        <li><a href="listings.php?category_id=<?= $category_id ?>&sub_category_id=<?= $row_for_listing['sub_category_id'] ?>"><?= $row_for_sub_category['sub_category_name'] ?></a></li>
-                      <?php
-                      }
-                    } else {
-                      ?>
-                      <!-- <div class="utf_listing_item-container list-layout">
-                        <a href="#" class="utf_listing_item">
-                          <div class="utf_listing_item_content">
-                            <div class="utf_listing_item-inner">
-                              <h3>No Sub Category Found</h3>
-                            </div>
-                          </div>
-                        </a>
-                      </div> -->
-                    <?php
-                    }
-
-                    ?>
-
-
-                  </ul>
-
-                  <a href="sub_category.php?category_id=<?= $row_for_category["category_id"] ?>" class="view-all">View All</a>
-                </div>
+            <div style="width:100%;background-color:#ffd2d2;" class="tableItem dashboard_notifi_item ">
+              <div class="bg-c1 ">
+                <img src='./images/<?= $row_for_category['category_image'] ?>' style="padding:5px;max-height:60px;width:auto;"></img>
+                <h2><a class="hCathd" style="text-decoration:none;color:black;" href="sub_category.php?category_id=<?= $row_for_category["category_id"] ?>"> <?= $row_for_category["category_name"] ?> </a></h2>
               </div>
+
+            </div>
+            <!-- <div style="width:100%;background-color:#ffd2d2;" class="tableItem dashboard_notifi_item ">
+                <div class="utf_row_form utf_form_wide_block form_forgot_part"> <span class="lost_password fl_left">  <a href="forget_password.php">Forgot Password?</a> </span>
+                  <div class="checkboxes fl_right">
+                    <span class=""> <a href="register.php">Don’t have an account? Create one here.</a> </span>
+                  </div>
+                </div>
+
+            </div> -->
+
+
+
+
+            <div class="minht cBFlex" id="1">
+
+
               <div class="row cBW100">
                 <?php
                 $num_for_sub_category = 0;
@@ -510,14 +483,14 @@
                   while ($row_for_sub_category = mysqli_fetch_assoc($select_sub_category_result)) {
                     $sub_category_name = $row_for_sub_category['sub_category_name'];
                     $sub_category_id = $row_for_sub_category['sub_category_id'];
-                ?> <div class="col-md-4 col-sm-6 bdr1">
+                ?> <div class="col-md-4 col-sm-6 bdr1" id="banner_sub_category_<?= $sub_category_id ?>">
                       <div class="product-item">
                         <div class="product-thumbnail lazy">
-                          <a href="listings.php?category_id=<?= $category_id ?>&sub_category_id=<?= $sub_category_id ?>"><img data-original="images/smallOilExpeller.jpg" alt="oil expeller" src="images/<?= $row_for_sub_category['sub_category_image']?>" title="smallOilExpeller"></a>
+                          <a href="listings.php?category_id=<?= $category_id ?>&sub_category_id=<?= $sub_category_id ?>"><img data-original="images/smallOilExpeller.jpg" alt="<?= $row_for_sub_category['sub_category_name'] ?>" src="images/<?= $row_for_sub_category['sub_category_image'] ?>" title="<?= $row_for_sub_category['sub_category_name'] ?>"></a>
                         </div>
                         <div class="product-meta">
                           <a href="listings.php?category_id=<?= $category_id ?>&sub_category_id=<?= $sub_category_id ?>">
-                            <h3><?= $row_for_sub_category['sub_category_name'] ?>
+                            <h3 ><?= $row_for_sub_category['sub_category_name'] ?>
                             </h3>
                           </a>
                           <ul>
@@ -536,6 +509,8 @@
                             }
                             if ($num_for_listing > 0) {
                               while ($row_for_listing = mysqli_fetch_assoc($select_listing_result)) {
+                                $show_banner_of_category = true;
+
                                 $listing_id  = $row_for_listing['listing_id'];
                             ?>
                                 <!-- <img src="images/<?= $row_for_listing['listing_image'] ?>" alt=""> -->
@@ -551,6 +526,11 @@
                                   <div class="utf_listing_item_content">
                                     <div class="utf_listing_item-inner"> -->
                               <h5>No Listing Found</h5>
+                              <style>
+                                #banner_sub_category_<?= $sub_category_id ?> {
+                                  display: none;
+                                }
+                              </style>
                               <!-- </div>
                                   </div>
                                 </a>
@@ -578,6 +558,7 @@
                       </div>
                       <div class="product-meta">
                         <h3>No Sub Category Found</h3>
+
                       </div>
                     </div>
                   </div>
@@ -599,7 +580,19 @@
         </div>
         </div>
       </section>
-  <?php }
+      <?php
+
+      if (!$show_banner_of_category) {
+      ?>
+        <style>
+          #banner_category_<?= $category_id ?> {
+            display: none;
+          }
+        </style>
+  <?php
+
+      }
+    }
   }
 
   ?>
@@ -936,7 +929,7 @@
       // alert("hello");
 
       $.ajax({
-        url: "cities-by-state.php",
+        url: "./service/cities-by-state.php",
         type: "POST",
         data: {
           state_id: state_id
@@ -946,15 +939,14 @@
           $("#city").empty();
           $("#city").removeClass('selectpicker');
 
-          $("#city").append("<label for=''>City</label>",
+          $("#city").append("",
             <?php
 
-            ?> "<div class='intro-search-field utf-chosen-cat-single'><select style='margin-bottom:0px' name='city' value='' title='' id='city' data-selected-text-format='count'> </select> </div>",
-
+            ?> "<select style='margin-bottom:0px' name='city_id' value='' title='' id='city_id' data-selected-text-format='count'> </select> ",
             <?php
             ?>
           );
-          $("#city").html(result);
+          $("#city_id").html(result);
           console.log(result);
         }
       });

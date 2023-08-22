@@ -113,8 +113,8 @@ if (isset($_POST['addList'])) {
 
 
   <!--JS-->
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery-migrate-1.2.1.js"></script>
+  <!-- <script src="js/jquery.js"></script>
+  <script src="js/jquery-migrate-1.2.1.js"></script> -->
 
 </head>
 
@@ -140,7 +140,7 @@ if (isset($_POST['addList'])) {
     <?php include "./header/global_header.php"; ?>
     <!-- <div class="forms_div ">
 
-      <form method="POST" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+      <form enctype="multipart/form-data" method="POST" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
         <input type="hidden" id="category_id" name="category_id" value="<?= $category_id ?>">
         <h3 class="headline_part centered margin-bottom-30"> Add Listing </h3>
 
@@ -217,7 +217,7 @@ if (isset($_POST['addList'])) {
         <div class="col-lg-12">
 
           <div id="utf_add_listing_part">
-            <form method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
+            <form enctype="multipart/form-data" method="POST" action="<?= $_SERVER["REQUEST_URI"]; ?>">
               <input type="hidden" name="addList" id="addList" value="addList" />
               <div class="add_utf_listing_section margin-top-45" validate>
                 <div class="utf_add_listing_part_headline_part">
@@ -486,7 +486,7 @@ if (isset($_POST['addList'])) {
         // alert("hello");
         var category_id = this.value;
         $.ajax({
-          url: "sub_category_by_category.php",
+          url: "./service/sub_category_by_category.php",
           type: "POST",
           data: {
             category_id: category_id
@@ -503,7 +503,7 @@ if (isset($_POST['addList'])) {
       //   // alert("hello");
       //   var country_id = this.value;
       //   $.ajax({
-      //     url: "states-by-country.php",
+      //     url: "./service/states-by-country.php",
       //     type: "POST",
       //     data: {
       //       country_id: country_id
@@ -520,7 +520,7 @@ if (isset($_POST['addList'])) {
       // $('#state').on('change', function() {
       //   var state_id = this.value;
       //   $.ajax({
-      //     url: "cities-by-state.php",
+      //     url: "./service/cities-by-state.php",
       //     type: "POST",
       //     data: {
       //       state_id: state_id
@@ -538,7 +538,7 @@ if (isset($_POST['addList'])) {
         // alert("hello");
 
         $.ajax({
-          url: "cities-by-state.php",
+          url: "./service/cities-by-state.php",
           type: "POST",
           data: {
             state_id: state_id

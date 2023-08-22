@@ -15,10 +15,10 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="images/favicon.png">
   <!-- Style CSS -->
-  <link rel="stylesheet" href="css/stylesheet.css">
-  <link rel="stylesheet" href="css/mmenu.css">
-  <link rel="stylesheet" href="css/perfect-scrollbar.css">
-  <link rel="stylesheet" href="css/style.css" id="colors">
+  <link rel="stylesheet" href="../css/stylesheet.css">
+  <link rel="stylesheet" href="../css/mmenu.css">
+  <link rel="stylesheet" href="../css/perfect-scrollbar.css">
+  <link rel="stylesheet" href="../css/style.css" id="colors">
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
@@ -29,7 +29,7 @@
 
 
   <?php include "./component/preloader.php" ?>
-  <?php include "./service/pick_ago_time.php" ?>
+  <?php include "../service/pick_ago_time.php" ?>
 
 
   <!-- Wrapper -->
@@ -295,17 +295,17 @@
   </div>
 
   <!-- Scripts -->
-  <script src="scripts/jquery-3.4.1.min.js"></script>
-  <script src="scripts/chosen.min.js"></script>
-  <script src="scripts/perfect-scrollbar.min.js"></script>
-  <script src="scripts/slick.min.js"></script>
-  <script src="scripts/rangeslider.min.js"></script>
-  <script src="scripts/magnific-popup.min.js"></script>
-  <script src="scripts/jquery-ui.min.js"></script>
-  <script src="scripts/mmenu.js"></script>
-  <script src="scripts/tooltips.min.js"></script>
-  <script src="scripts/color_switcher.js"></script>
-  <script src="scripts/jquery_custom.js"></script>
+  <script src="../scripts/jquery-3.4.1.min.js"></script>
+  <script src="../scripts/chosen.min.js"></script>
+  <script src="../scripts/perfect-scrollbar.min.js"></script>
+  <script src="../scripts/slick.min.js"></script>
+  <script src="../scripts/rangeslider.min.js"></script>
+  <script src="../scripts/magnific-popup.min.js"></script>
+  <script src="../scripts/jquery-ui.min.js"></script>
+  <script src="../scripts/mmenu.js"></script>
+  <script src="../scripts/tooltips.min.js"></script>
+  <script src="../scripts/color_switcher.js"></script>
+  <script src="../scripts/jquery_custom.js"></script>
   <script>
     (function($) {
       try {
@@ -323,7 +323,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-  <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+  <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
   <script>
     $(document).ready(function() {
       $('#myTable').DataTable();
